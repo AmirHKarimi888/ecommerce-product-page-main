@@ -1,9 +1,11 @@
 <template>
-    <div>
-        Home
-    </div>
+    <main>
+        <ProductView />
+    </main>
 </template>
 
 <script setup>
+import { ProductView } from '../components';
+
 
 </script>
