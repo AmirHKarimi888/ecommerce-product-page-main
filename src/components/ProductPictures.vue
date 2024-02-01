@@ -1,31 +1,119 @@
 <template>
     <div class="product-pictures max-[500px]:hidden">
         <div class="product-thumbnail">
-            <img src="../assets/images/image-product-1.jpg" alt="Product-Thumbnail">
+            <img @click="toggleProductPictureModal" :src="showingMainPicture" class="cursor-pointer" alt="Product-Thumbnail">
+            <ProductPictureModal 
+             :selectedProductsPictures="selectedProductsPictures"
+             :showingMainPicture="showingMainPicture"
+             :counter="counter"
+             @selectPicture="selectPicture" 
+             @toggleProductPictureModal="toggleProductPictureModal"
+            />
         </div>
 
         <div class="product-select-pictures">
-            <span><img src="../assets/images/image-product-1-thumbnail.jpg" alt="Product-Picture"></span>
-            <span><img src="../assets/images/image-product-2-thumbnail.jpg" alt="Product-Picture"></span>
-            <span><img src="../assets/images/image-product-3-thumbnail.jpg" alt="Product-Picture"></span>
-            <span><img src="../assets/images/image-product-4-thumbnail.jpg" alt="Product-Picture"></span>
+            <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer"
+                @click="selectPicture(picture)">
+                <img :src="picture?.thumbnail" alt="Product-Picture">
+            </span>
         </div>
     </div>
 
 
 
     <div class="product-pictures-mobile min-[501px]:hidden">
-        <div class="product-pictures-mobile-main">
-            <img src="../assets/images/image-product-1.jpg" alt="Product-Picture">
+        <div class="product-pictures-mobile-main" :style="{ backgroundImage: `url(${showingMainPicture})` }">
+            <span @click="showNextPicture" class="product-pictures-mobile-btn"><img class=""
+                    src="../assets/images/icon-previous.svg" alt="prev"></span>
+            <span @click="showPreviousPicture" class="product-pictures-mobile-btn"><img class=""
+                    src="../assets/images/icon-next.svg" alt="prev"></span>
         </div>
 
-        <div class="product-pictures-mobile-btns">
-            <span class="product-pictures-mobile-btn"><img class="" src="../assets/images/icon-previous.svg" alt="prev"></span>
-            <span class="product-pictures-mobile-btn"><img class="" src="../assets/images/icon-next.svg" alt="prev"></span>
-        </div>
+        <!-- <div class="product-pictures-mobile-btns">
+
+        </div> -->
     </div>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { useStore } from '../store';
+import { ProductPictureModal } from "../components";
+
+const selectedProduct = ref({});
+const selectedProductsPictures = ref([]);
+
+const showingMainPicture = ref('');
+
+const counter = ref(0);
+
+onMounted(() => {
+    useStore().getProduct()
+        .then(() => selectedProduct.value = useStore().selectedProduct)
+        .then(() => selectedProductsPictures.value = selectedProduct.value.pictures)
+        .then(() => showingMainPicture.value = selectedProductsPictures.value[0].src)
+})
+
+
+const toggleProductPictureModal = () => {
+    const productPictureModalBackdropEl = document.querySelector(".product-picture-modal-backdrop");
+    const productPictureModalEl = document.querySelector(".product-picture-modal");
+
+    productPictureModalBackdropEl.classList.toggle("hidden");
+
+    productPictureModalEl.classList.add("fadeIn");
+    setTimeout(() => {
+        productPictureModalEl.classList.remove("fadeIn");
+    }, 1700);
+}
+
+//Desktop
+const selectPicture = (picture) => {
+    showingMainPicture.value = picture?.src;
+    counter.value = +picture?.id;
+}
+
+
+//Mobile picture slider
+
+const showPreviousPicture = () => {
+    counter.value ++;
+    counter.value === 4 ? counter.value = 0 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value].src;
+
+}
+
+const showNextPicture = () => {
+
+    counter.value --;
+    counter.value === -1 ? counter.value = 3 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value].src;
+}
+
+
+const autoSlideToggler = () => {
+    counter.value ++;
+    counter.value === 4 ? counter.value = 0 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value].src;
+
+    document.querySelector(".product-pictures-mobile-main").classList.add("moveToRight");
+    setTimeout(() => {
+        document.querySelector(".product-pictures-mobile-main").classList.remove("moveToRight");
+    }, 1500)
+
+}
+
+const Inter = setInterval(autoSlideToggler, 4000);
+
+if (window.innerWidth >= 501) {
+    clearInterval(Inter);
+}
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth >= 501) {
+        clearInterval(Inter);
+    }
+})
+
 
 </script>

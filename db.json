@@ -9,12 +9,11 @@
             "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
             "cost": 250,
             "discount": 0.5,
-            "thumbnail": "",
             "pictures": [
-                { "id": "1", "src": "" },
-                { "id": "2", "src": "" },
-                { "id": "3", "src": "" },
-                { "id": "4", "src": "" }
+                { "id": "1", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-1.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-1-thumbnail.jpg" },
+                { "id": "2", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-2.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-2-thumbnail.jpg" },
+                { "id": "3", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-3.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-3-thumbnail.jpg" },
+                { "id": "4", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-4.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-4-thumbnail.jpg" }
             ]
         }
     ]
