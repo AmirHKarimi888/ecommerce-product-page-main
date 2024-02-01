@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
         <div class="navbar-logo">
-            <span class="navbar-btns-menu"><img class="cursor-pointer" src="../assets/images/icon-menu.svg" alt="Cart" /></span>
+            <span class="navbar-btns-menu" @click="toggleSidebar"><img class="cursor-pointer" src="../assets/images/icon-menu.svg" alt="Cart" /></span>
             <RouterLink to="/"><img src="../assets/images/logo.svg" alt="Logo" /></RouterLink>
         </div>
 
@@ -16,11 +16,16 @@
             <span class="navbar-btns-avatar"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
         </div>
     </nav>
+    <HeaderSidebar
+      :navItems="navItems" 
+      @toggleSidebar="toggleSidebar"
+    />
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
+import { HeaderSidebar } from ".";
 
 const navItems = reactive([
     { title: "Collections", link: "/" },
@@ -29,4 +34,11 @@ const navItems = reactive([
     { title: "About", link: "/" },
     { title: "Contact", link: "/" }
 ])
+
+const toggleSidebar = () => {
+    const sidebarBackdropEl = document.querySelector(".sidebar-backdrop");
+    const sidebarEl = document.querySelector(".sidebar");
+    sidebarBackdropEl.classList.toggle("hidden");
+    sidebarEl.classList.add("fadeInToRight");
+}
 </script>

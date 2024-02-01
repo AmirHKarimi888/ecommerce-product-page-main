@@ -38,10 +38,26 @@ body {
         @apply w-12 h-12 rounded-full hidden max-[700px]:flex justify-center items-center cursor-pointer hover:border hover:bg-gray-100 border-gray-200;
     }
 
+    .sidebar-backdrop {
+        @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80 z-10;
+    }
+    .sidebar {
+        @apply w-[210px] h-screen bg-white absolute top-0 left-0
+    }
+    .sidebar-close-btn {
+        @apply w-12 h-12 flex justify-center items-center rounded-full hover:border hover:bg-gray-100 border-gray-200 cursor-pointer;
+    }
+    .sidebar-items {
+        @apply mt-10 ml-4 grid gap-3 font-bold;
+    }
+    .sidebar-item {
+        @apply hover:text-orange-500 duration-300;
+    }
+
 
     /*Main*/
     .product {
-        @apply max-[500px]:w-full max-[700px]:w-[80%] max-[1000px]:w-[70%] min-[1001px]:w-[50%] mx-auto max-[550px]:mt-0 my-20 grid grid-cols-2 max-[550px]:grid-cols-1 gap-x-16;
+        @apply max-[500px]:w-full max-[700px]:w-[90%] max-[800px]:w-[80%] max-[900px]:w-[70%] max-[1000px]:w-[60%] min-[1001px]:w-[50%] mx-auto max-[550px]:mt-10 max-[500px]:mt-0 my-20 grid grid-cols-2 max-[550px]:grid-cols-1 gap-x-16;
     }
     .product-pictures {
         @apply grid gap-4
@@ -56,16 +72,19 @@ body {
         @apply rounded-md;
     }
     .product-picture-modal-backdrop {
-        @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80;
+        @apply fixed top-0 left-0 w-full py-16 h-screen flex justify-center bg-gray-800/80;
     }
     .product-picture-modal {
-        @apply w-[450px] h-[450px] grid gap-4;
+        @apply w-[500px] h-[500px] grid gap-6;
+    }
+    .product-picture-modal-thumbnail {
+        @apply  flex justify-around items-center;
     }
     .product-picture-modal-thumbnail img {
-        @apply rounded-lg;
+        @apply rounded-lg grid grid-cols-3;
     }
     .product-picture-modal-select-pictures {
-        @apply grid grid-cols-4 gap-3
+        @apply w-[80%] mx-auto grid grid-cols-4 gap-3
     }
     .product-picture-modal-select-pictures img {
         @apply rounded-md;
@@ -82,6 +101,9 @@ body {
     }
     .product-pictures-mobile-btn {
         @apply w-12 h-12 my-2 bg-white border border-gray-400 rounded-full flex justify-center items-center cursor-pointer;
+    }
+    .product-picture-modal-close-btn {
+        @apply w-12 h-12 absolute top-0 right-0 mt-5 mr-5 border-gray-400 rounded-full flex justify-center items-center cursor-pointer;
     }
 }
 
@@ -132,4 +154,21 @@ body {
 
 .fadeIn {
     animation: fadeIn 1.5s ease 0s 1 normal forwards;
+}
+
+
+
+@keyframes fadeInToRight {
+	0% {
+		opacity: 0;
+		transform: translateX(-200px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+.fadeInToRight {
+    animation: fadeInToRight 1s ease 0s 1 normal forwards;
 }

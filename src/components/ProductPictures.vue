@@ -8,13 +8,15 @@
              :counter="counter"
              @selectPicture="selectPicture" 
              @toggleProductPictureModal="toggleProductPictureModal"
+             @showPreviousPicture="showPreviousPicture"
+             @showNextPicture="showNextPicture"
             />
         </div>
 
         <div class="product-select-pictures">
-            <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer"
+            <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg' : ''"
                 @click="selectPicture(picture)">
-                <img :src="picture?.thumbnail" alt="Product-Picture">
+                <img :src="picture?.thumbnail" :class="counter === +picture?.id ? 'opacity-50' : ''" alt="Product-Picture">
             </span>
         </div>
     </div>
@@ -24,7 +26,7 @@
     <div class="product-pictures-mobile min-[501px]:hidden">
         <div class="product-pictures-mobile-main" :style="{ backgroundImage: `url(${showingMainPicture})` }">
             <span @click="showNextPicture" class="product-pictures-mobile-btn"><img class=""
-                    src="../assets/images/icon-previous.svg" alt="prev"></span>
+                    src="../assets/images/icon-previous.svg" alt="next"></span>
             <span @click="showPreviousPicture" class="product-pictures-mobile-btn"><img class=""
                     src="../assets/images/icon-next.svg" alt="prev"></span>
         </div>
@@ -45,7 +47,7 @@ const selectedProductsPictures = ref([]);
 
 const showingMainPicture = ref('');
 
-const counter = ref(0);
+const counter = ref(1);
 
 onMounted(() => {
     useStore().getProduct()
@@ -60,11 +62,8 @@ const toggleProductPictureModal = () => {
     const productPictureModalEl = document.querySelector(".product-picture-modal");
 
     productPictureModalBackdropEl.classList.toggle("hidden");
-
     productPictureModalEl.classList.add("fadeIn");
-    setTimeout(() => {
-        productPictureModalEl.classList.remove("fadeIn");
-    }, 1700);
+
 }
 
 //Desktop
@@ -78,23 +77,23 @@ const selectPicture = (picture) => {
 
 const showPreviousPicture = () => {
     counter.value ++;
-    counter.value === 4 ? counter.value = 0 : null;
-    showingMainPicture.value = selectedProductsPictures.value[counter.value].src;
+    counter.value === 5 ? counter.value = 1 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 
 }
 
 const showNextPicture = () => {
 
     counter.value --;
-    counter.value === -1 ? counter.value = 3 : null;
-    showingMainPicture.value = selectedProductsPictures.value[counter.value].src;
+    counter.value === 0 ? counter.value = 4 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 }
 
 
 const autoSlideToggler = () => {
     counter.value ++;
-    counter.value === 4 ? counter.value = 0 : null;
-    showingMainPicture.value = selectedProductsPictures.value[counter.value].src;
+    counter.value === 5 ? counter.value = 1 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 
     document.querySelector(".product-pictures-mobile-main").classList.add("moveToRight");
     setTimeout(() => {
