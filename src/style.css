@@ -105,6 +105,51 @@ body {
     .product-picture-modal-close-btn {
         @apply w-12 h-12 absolute top-0 right-0 mt-5 mr-5 border-gray-400 rounded-full flex justify-center items-center cursor-pointer;
     }
+
+
+    .product-details {
+        @apply max-[500px]:p-5 max-[550px]:mt-8 grid;
+    }
+    .product-details-pre-title {
+        @apply font-bold text-orange-400;
+    }
+    .product-details-title {
+        @apply mt-2 font-bold text-[2rem];
+    }
+    .product-details-descr {
+        @apply mt-5 text-gray-700;
+    }
+    .product-details-price {
+        @apply mt-5
+    }
+    .product-details-price-main {
+        @apply font-bold text-2xl;
+    }
+    .product-details-price-discount {
+        @apply font-bold ml-4 p-[4px] bg-red-100 text-orange-400 rounded-md;
+    }
+    .product-details-price-prev-price {
+        @apply font-bold text-gray-400 line-through max-[550px]:inline max-[550px]:ms-[50%]
+    }
+
+    .product-details-btns {
+        @apply w-full mt-5 flex gap-3 justify-start flex-wrap;
+    }
+    .product-details-plus-minus {
+        @apply w-[40%] max-[500px]:w-full bg-gray-200 rounded-md flex gap-1 justify-between items-center
+    }
+    .product-details-minus-btn {
+        @apply p-3 cursor-pointer;
+    }
+    .product-details-quantity {
+        @apply font-bold;
+    }
+    .product-details-plus-btn {
+        @apply p-3 cursor-pointer;
+    }
+    .product-details-add-to-card-btn {
+        @apply text-white w-[50%] max-[500px]:w-full p-2 bg-orange-500 rounded-md flex justify-center gap-3 cursor-pointer;
+    }
 }
 
 

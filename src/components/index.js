@@ -6,5 +6,6 @@ import ProductView from "../components/ProductView.vue";
 import ProductPictures from "../components/ProductPictures.vue";
 import ProductPictureModal from "../components/ProductPictureModal.vue";
 import ProductDetails from "../components/ProductDetails.vue";
+import ProductDetailsAddToCart from "../components/ProductDetailsAddToCart.vue"
 
-export { HeaderView, HeaderNavbar, HeaderSidebar, ProductView, ProductPictures, ProductPictureModal, ProductDetails };
+export { HeaderView, HeaderNavbar, HeaderSidebar, ProductView, ProductPictures, ProductPictureModal, ProductDetails, ProductDetailsAddToCart };
