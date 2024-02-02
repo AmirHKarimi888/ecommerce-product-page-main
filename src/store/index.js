@@ -25,5 +25,22 @@ export const useStore = defineStore("store", () => {
         .then((res) => users.value = res.data);
     }
 
-    return { products, selectedProduct, loggedInUser, loginStatus, users, getAllProducts, getProduct, getAllUsers }
+    const getLoggedInUser = async() => {
+
+        const uid = localStorage.getItem("loggedInUser");
+
+        await getAllUsers()
+        .then(() => {
+            loggedInUser.value = users.value.find(user => {
+                if(user?.uid === uid) {
+                  return user;
+                }
+            })
+        })
+        .then(() => {
+            loggedInUser.value ? loginStatus.value = true : loginStatus.value = false;
+        })
+    }
+
+    return { products, selectedProduct, loggedInUser, loginStatus, users, getAllProducts, getProduct, getAllUsers, getLoggedInUser }
 })

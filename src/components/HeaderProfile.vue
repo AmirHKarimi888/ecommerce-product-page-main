@@ -1,7 +1,13 @@
 <template>
     <div class="header-profile-container hidden">
         <div class="header-profile">
-        <div class="header-profile-title">Cart</div>
+        <div class="header-profile-title">
+            <span v-if="useStore().loginStatus" class="header-profile-title-avatar"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
+            <span class="header-profile-title-username">
+                {{ useStore().loggedInUser?.username }}
+                <span class="header-profile-title-email">{{ useStore().loggedInUser?.email }}</span>
+            </span>
+        </div>
         <ul class="header-profile-items">
             <li class="header-profile-item">
                 <span class="header-profile-item-thumbnail">
@@ -63,5 +69,7 @@
 </template>
 
 <script setup>
+import { useStore } from '../store';
+
 
 </script>

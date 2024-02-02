@@ -12,7 +12,7 @@
         </ul>
 
         <div class="navbar-btns">
-            <span class="navbar-btns-cart" @click="toggleCart"><img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" /></span>
+            <span v-if="useStore().loginStatus" class="navbar-btns-cart" @click="toggleCart"><img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" /></span>
             <span v-if="useStore().loginStatus" class="navbar-btns-avatar" @click="toggleProfile"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
             <RouterLink v-else to="/" class="navbar-btns-signup">Signup</RouterLink>
         </div>
@@ -22,6 +22,7 @@
       @toggleSidebar="toggleSidebar"
     />
     <HeaderCart 
+      v-if="cartView"
     />
     <HeaderProfile
     />
@@ -41,24 +42,28 @@ const navItems = reactive([
     { title: "Contact", link: "/" }
 ])
 
+const cartView =  ref(false);
 const toggleCart = () => {
-    const cartContainerEl = document.querySelector(".header-cart-container");
-    const cartEl = document.querySelector(".header-cart");
-    cartContainerEl.classList.toggle("hidden");
-    cartEl.classList.add("fadeInToRight");
+    cartView.value = !cartView.value;
+    setTimeout(() => {
+        const cartContainerEl = document.querySelector(".header-cart-container");
+        const cartEl = document.querySelector(".header-cart");
+        cartContainerEl?.classList.toggle("hidden");
+        cartEl?.classList.add("fadeInToRight");
+    }, 10)
 }
 
 const toggleProfile = () => {
     const profileContainerEl = document.querySelector(".header-profile-container");
     const profileEl = document.querySelector(".header-profile");
-    profileContainerEl.classList.toggle("hidden");
-    profileEl.classList.add("fadeInToRight");
+    profileContainerEl?.classList.toggle("hidden");
+    profileEl?.classList.add("fadeInToRight");
 }
 
 const toggleSidebar = () => {
     const sidebarBackdropEl = document.querySelector(".sidebar-backdrop");
     const sidebarEl = document.querySelector(".sidebar");
-    sidebarBackdropEl.classList.toggle("hidden");
-    sidebarEl.classList.add("fadeInToRight");
+    sidebarBackdropEl?.classList.toggle("hidden");
+    sidebarEl?.classList.add("fadeInToRight");
 }
 </script>

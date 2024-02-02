@@ -37,7 +37,7 @@ body {
         @apply w-12 rounded-full duration-100 hover:border-2  focus:border-2 border-orange-400;
     }
     .navbar-btns-signup {
-        @apply px-3 rounded-lg flex justify-center items-center bg-orange-500 text-white hover:bg-orange-400 duration-300 cursor-pointer; 
+        @apply p-3 rounded-lg flex justify-center items-center bg-orange-500 text-white hover:bg-orange-400 duration-300 cursor-pointer; 
     }
     .navbar-btns-menu {
         @apply w-12 h-12 rounded-full hidden max-[700px]:flex justify-center items-center cursor-pointer hover:border hover:bg-gray-100 border-gray-200;
@@ -89,7 +89,13 @@ body {
         @apply fixed top-16 min-[501px]:right-24 w-[340px] max-[500px]:w-[90%] bg-white shadow-2xl rounded-lg border box-border;
     }
     .header-profile-title {
-        @apply font-bold p-5 border-b
+        @apply font-bold p-5 border-b flex justify-start gap-3
+    }
+    .header-profile-title-username {
+        @apply text-lg
+    }
+    .header-profile-title-email {
+        @apply text-sm block text-gray-500;
     }
     .header-profile-items {
         @apply w-full p-5 grid gap-5;

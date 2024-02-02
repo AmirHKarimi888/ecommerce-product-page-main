@@ -1,27 +1,51 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "1",
+      "uid": "666666666666",
+      "username": "amir666",
+      "email": "amir666@email.com",
+      "avatar": "",
+      "password": "123456789",
+      "cart": [
         {
-            "id": "1",
-            "uid": "666666666666",
-            "username": "amir666",
-            "email": "amir666@email.com",
-            "avatar": "",
-            "password": "123456789"
+          "id": "1",
+          "uid": "1111111111111111",
+          "quantity": 6
         }
-    ],
-    "products": [
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "uid": "1111111111111111",
+      "title": "Fall Limited Edition Sneakers",
+      "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
+      "price": 250,
+      "discount": 0.5,
+      "pictures": [
         {
-            "id": "1",
-            "title": "Fall Limited Edition Sneakers",
-            "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
-            "price": 250,
-            "discount": 0.5,
-            "pictures": [
-                { "id": "1", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-1.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-1-thumbnail.jpg" },
-                { "id": "2", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-2.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-2-thumbnail.jpg" },
-                { "id": "3", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-3.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-3-thumbnail.jpg" },
-                { "id": "4", "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-4.jpg", "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-4-thumbnail.jpg" }
-            ]
+          "id": "1",
+          "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-1.jpg",
+          "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-1-thumbnail.jpg"
+        },
+        {
+          "id": "2",
+          "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-2.jpg",
+          "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-2-thumbnail.jpg"
+        },
+        {
+          "id": "3",
+          "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-3.jpg",
+          "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-3-thumbnail.jpg"
+        },
+        {
+          "id": "4",
+          "src": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-4.jpg",
+          "thumbnail": "https://tsbsankara-e-commerce-yt.netlify.app/images/image-product-4-thumbnail.jpg"
         }
-    ]
+      ]
+    }
+  ]
 }
