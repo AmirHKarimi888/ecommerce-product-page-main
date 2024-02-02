@@ -5,6 +5,10 @@ import Http from "../Http";
 export const useStore = defineStore("store", () => {
     const products = ref([]);
     const selectedProduct = ref({});
+    const users = ref([]);
+    const loggedInUser = ref({});
+    const loginStatus = ref(false);
+
 
     const getAllProducts = async () => {
         await Http.get(Http.url + "/products")
@@ -16,5 +20,10 @@ export const useStore = defineStore("store", () => {
         .then((res) => selectedProduct.value = res.data);
     }
 
-    return { products, selectedProduct, getAllProducts, getProduct }
+    const getAllUsers = async() => {
+        await Http.get(Http.url + `/users`)
+        .then((res) => users.value = res.data);
+    }
+
+    return { products, selectedProduct, loggedInUser, loginStatus, users, getAllProducts, getProduct, getAllUsers }
 })

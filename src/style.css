@@ -13,6 +13,8 @@ body {
 
 @layer components {
     /*Header*/
+
+    /*Navbar*/
     .navbar {
         @apply w-full h-20 border-b border-gray-200 flex justify-around max-[700px]:justify-between px-5 items-center;
     }
@@ -34,10 +36,14 @@ body {
     .navbar-btns-avatar {
         @apply w-12 rounded-full duration-100 hover:border-2  focus:border-2 border-orange-400;
     }
+    .navbar-btns-signup {
+        @apply px-3 rounded-lg flex justify-center items-center bg-orange-500 text-white hover:bg-orange-400 duration-300 cursor-pointer; 
+    }
     .navbar-btns-menu {
         @apply w-12 h-12 rounded-full hidden max-[700px]:flex justify-center items-center cursor-pointer hover:border hover:bg-gray-100 border-gray-200;
     }
 
+    /*Cart*/
     .header-cart-container {
         @apply max-[500px]:flex justify-center;
     }
@@ -72,9 +78,48 @@ body {
         @apply cursor-pointer;
     }
     .header-cart-checkout-btn {
-        @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg;
+        @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg hover:bg-orange-400 duration-300 cursor-pointer;
     }
 
+    /*Profile*/
+    .header-profile-container {
+        @apply max-[500px]:flex justify-center;
+    }
+    .header-profile {
+        @apply fixed top-16 min-[501px]:right-24 w-[340px] max-[500px]:w-[90%] bg-white shadow-2xl rounded-lg border box-border;
+    }
+    .header-profile-title {
+        @apply font-bold p-5 border-b
+    }
+    .header-profile-items {
+        @apply w-full p-5 grid gap-5;
+    }
+    .header-profile-item {
+        @apply flex justify-between items-center gap-4;
+    }
+    .header-profile-item-thumbnail img {
+        @apply w-11 h-11 rounded-md
+    }
+    .header-profile-item-descr {
+        @apply text-[0.9rem];
+    }
+    .header-profile-item-descr-title {
+        @apply text-gray-500;
+    }
+    .header-profile-item-descr-price-single {
+        @apply text-gray-500;
+    }
+    .header-profile-item-descr-price-total {
+        @apply font-bold;
+    }
+    .header-profile-item-delete-btn {
+        @apply cursor-pointer;
+    }
+    .header-profile-checkout-btn {
+        @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg hover:bg-orange-400 duration-300 cursor-pointer;
+    }
+
+    /*Sidebar*/
     .sidebar-backdrop {
         @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80 z-10;
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="header-cart-container">
+    <div class="header-cart-container hidden">
         <div class="header-cart">
         <div class="header-cart-title">Cart</div>
         <ul class="header-cart-items">

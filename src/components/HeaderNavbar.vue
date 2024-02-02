@@ -13,7 +13,8 @@
 
         <div class="navbar-btns">
             <span class="navbar-btns-cart" @click="toggleCart"><img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" /></span>
-            <span class="navbar-btns-avatar"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
+            <span v-if="useStore().loginStatus" class="navbar-btns-avatar" @click="toggleProfile"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
+            <RouterLink v-else to="/" class="navbar-btns-signup">Signup</RouterLink>
         </div>
     </nav>
     <HeaderSidebar
@@ -22,12 +23,15 @@
     />
     <HeaderCart 
     />
+    <HeaderProfile
+    />
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { HeaderCart, HeaderSidebar } from ".";
+import { HeaderCart, HeaderProfile, HeaderSidebar } from ".";
+import { useStore } from "../store";
 
 const navItems = reactive([
     { title: "Collections", link: "/" },
@@ -42,6 +46,13 @@ const toggleCart = () => {
     const cartEl = document.querySelector(".header-cart");
     cartContainerEl.classList.toggle("hidden");
     cartEl.classList.add("fadeInToRight");
+}
+
+const toggleProfile = () => {
+    const profileContainerEl = document.querySelector(".header-profile-container");
+    const profileEl = document.querySelector(".header-profile");
+    profileContainerEl.classList.toggle("hidden");
+    profileEl.classList.add("fadeInToRight");
 }
 
 const toggleSidebar = () => {

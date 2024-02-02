@@ -1,6 +1,13 @@
 {
     "users": [
-
+        {
+            "id": "1",
+            "uid": "666666666666",
+            "username": "amir666",
+            "email": "amir666@email.com",
+            "avatar": "",
+            "password": "123456789"
+        }
     ],
     "products": [
         {
