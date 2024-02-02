@@ -12,7 +12,7 @@
         </ul>
 
         <div class="navbar-btns">
-            <span class="navbar-btns-cart"><img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" /></span>
+            <span class="navbar-btns-cart" @click="toggleCart"><img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" /></span>
             <span class="navbar-btns-avatar"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
         </div>
     </nav>
@@ -20,12 +20,14 @@
       :navItems="navItems" 
       @toggleSidebar="toggleSidebar"
     />
+    <HeaderCart 
+    />
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { HeaderSidebar } from ".";
+import { HeaderCart, HeaderSidebar } from ".";
 
 const navItems = reactive([
     { title: "Collections", link: "/" },
@@ -34,6 +36,13 @@ const navItems = reactive([
     { title: "About", link: "/" },
     { title: "Contact", link: "/" }
 ])
+
+const toggleCart = () => {
+    const cartContainerEl = document.querySelector(".header-cart-container");
+    const cartEl = document.querySelector(".header-cart");
+    cartContainerEl.classList.toggle("hidden");
+    cartEl.classList.add("fadeInToRight");
+}
 
 const toggleSidebar = () => {
     const sidebarBackdropEl = document.querySelector(".sidebar-backdrop");

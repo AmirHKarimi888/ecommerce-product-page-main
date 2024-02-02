@@ -38,6 +38,43 @@ body {
         @apply w-12 h-12 rounded-full hidden max-[700px]:flex justify-center items-center cursor-pointer hover:border hover:bg-gray-100 border-gray-200;
     }
 
+    .header-cart-container {
+        @apply max-[500px]:flex justify-center;
+    }
+    .header-cart {
+        @apply fixed top-16 min-[501px]:right-24 w-[340px] max-[500px]:w-[90%] bg-white shadow-2xl rounded-lg border box-border;
+    }
+    .header-cart-title {
+        @apply font-bold p-5 border-b
+    }
+    .header-cart-items {
+        @apply w-full p-5 grid gap-5;
+    }
+    .header-cart-item {
+        @apply flex justify-between items-center gap-4;
+    }
+    .header-cart-item-thumbnail img {
+        @apply w-11 h-11 rounded-md
+    }
+    .header-cart-item-descr {
+        @apply text-[0.9rem];
+    }
+    .header-cart-item-descr-title {
+        @apply text-gray-500;
+    }
+    .header-cart-item-descr-price-single {
+        @apply text-gray-500;
+    }
+    .header-cart-item-descr-price-total {
+        @apply font-bold;
+    }
+    .header-cart-item-delete-btn {
+        @apply cursor-pointer;
+    }
+    .header-cart-checkout-btn {
+        @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg;
+    }
+
     .sidebar-backdrop {
         @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80 z-10;
     }

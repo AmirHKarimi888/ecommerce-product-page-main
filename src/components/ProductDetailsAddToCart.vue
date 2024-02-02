@@ -8,9 +8,9 @@
 
         <div class="product-details-btns">
             <span class="product-details-plus-minus">
-                <span class="product-details-minus-btn"><img src="../assets/images/icon-minus.svg" alt="minus"></span>
-                <span class="product-details-quantity">0</span>
-                <span class="product-details-plus-btn"><img src="../assets/images/icon-plus.svg" alt="plus"></span>
+                <span class="product-details-minus-btn" @click="quantity > 0 ? quantity-- : null"><img src="../assets/images/icon-minus.svg" alt="minus"></span>
+                <span class="product-details-quantity">{{ quantity }}</span>
+                <span class="product-details-plus-btn" @click="quantity++"><img src="../assets/images/icon-plus.svg" alt="plus"></span>
             </span>
 
             <span class="product-details-add-to-card-btn">
@@ -22,6 +22,8 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { useStore } from '../store';
 
+const quantity = ref(0);
 </script>
