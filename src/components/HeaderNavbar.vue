@@ -35,7 +35,7 @@ import { HeaderCart, HeaderProfile, HeaderSidebar } from ".";
 import { useStore } from "../store";
 
 const navItems = reactive([
-    { title: "Collections", link: "/" },
+    { title: "Collections", link: "/collections" },
     { title: "Men", link: "/" },
     { title: "Women", link: "/" },
     { title: "About", link: "/" },

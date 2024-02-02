@@ -22,18 +22,22 @@
             </span>
         </div>
     </div>
+    <HeaderCartAddedModal />
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useStore } from '../store';
 import Http from "../Http";
+import { HeaderCartAddedModal } from ".";
+
+const props = defineProps(["selectedProductId"]);
 
 const quantity = ref(0);
 const foundInCartItem = ref({});
 
 onMounted(async () => {
-    useStore().getLoggedInUser()
+    await useStore().getLoggedInUser(props.selectedProductId)
         .then(() => {
             foundInCartItem.value = useStore().loggedInUser?.cart?.find(item => {
                 if (item?.uid === useStore().selectedProduct?.uid) {
@@ -63,6 +67,9 @@ const addToCart = async () => {
                 await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
                     .then((res) => useStore().loggedInUser = res.data);
             })
+            .then(() => {
+                document.querySelector(".header-cart-added-modal-backdrop").classList.remove("hidden");
+            })
 
     } else {
 
@@ -82,6 +89,9 @@ const addToCart = async () => {
                     await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
                         .then((res) => useStore().loggedInUser = res.data);
                 })
+                .then(() => {
+                document.querySelector(".header-cart-added-modal-backdrop").classList.remove("hidden");
+            })
         }
     }
 }

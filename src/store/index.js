@@ -15,7 +15,7 @@ export const useStore = defineStore("store", () => {
         .then((res) => products.value = res.data);
     }
 
-    const getProduct = async (id = "1") => {
+    const getProduct = async (id) => {
         await Http.get(Http.url + `/products/${id}`)
         .then((res) => selectedProduct.value = res.data);
     }

@@ -42,6 +42,8 @@ import { onMounted, ref } from 'vue';
 import { useStore } from '../store';
 import { ProductPictureModal } from "../components";
 
+const props = defineProps(["selectedProductId"]);
+
 const selectedProduct = ref({});
 const selectedProductsPictures = ref([]);
 
@@ -49,8 +51,8 @@ const showingMainPicture = ref('');
 
 const counter = ref(1);
 
-onMounted(() => {
-    useStore().getProduct()
+onMounted(async () => {
+    await useStore().getProduct(props.selectedProductId)
         .then(() => selectedProduct.value = useStore().selectedProduct)
         .then(() => selectedProductsPictures.value = selectedProduct.value.pictures)
         .then(() => showingMainPicture.value = selectedProductsPictures.value[0].src)
@@ -90,29 +92,29 @@ const showNextPicture = () => {
 }
 
 
-const autoSlideToggler = () => {
-    counter.value ++;
-    counter.value === 5 ? counter.value = 1 : null;
-    showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
+// const autoSlideToggler = () => {
+//     counter.value ++;
+//     counter.value === 5 ? counter.value = 1 : null;
+//     showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 
-    document.querySelector(".product-pictures-mobile-main").classList.add("moveToRight");
-    setTimeout(() => {
-        document.querySelector(".product-pictures-mobile-main").classList.remove("moveToRight");
-    }, 1500)
+//     document.querySelector(".product-pictures-mobile-main").classList.add("moveToRight");
+//     setTimeout(() => {
+//         document.querySelector(".product-pictures-mobile-main").classList.remove("moveToRight");
+//     }, 1500)
 
-}
+// }
 
-const Inter = setInterval(autoSlideToggler, 4000);
+// const Inter = setInterval(autoSlideToggler, 4000);
 
-if (window.innerWidth >= 501) {
-    clearInterval(Inter);
-}
+// if (window.innerWidth >= 501) {
+//     clearInterval(Inter);
+// }
 
-window.addEventListener("resize", () => {
-    if (window.innerWidth >= 501) {
-        clearInterval(Inter);
-    }
-})
+// window.addEventListener("resize", () => {
+//     if (window.innerWidth >= 501) {
+//         clearInterval(Inter);
+//     }
+// })
 
 
 </script>

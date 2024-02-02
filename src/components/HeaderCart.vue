@@ -1,5 +1,5 @@
 <template>
-    <div class="header-cart-container hidden">
+    <div class="header-cart-container hidden z-10">
         <div class="header-cart">
             <div class="header-cart-title">Cart</div>
 
@@ -12,7 +12,7 @@
                     <span class="header-cart-item-descr">
                         <div class="header-cart-item-descr-title">{{ item?.title }}</div>
                         <div class="header-cart-item-descr-price">
-                            <span class="header-cart-item-descr-price-single">${{ +item?.price * +item?.discount }} * {{ item?.quantity }}</span>
+                            <span class="header-cart-item-descr-price-single">${{ +item?.price * +item?.discount }} × {{ item?.quantity }}</span>
                             <span class="header-cart-item-descr-price-total"> = ${{ +item?.price * +item?.discount * item?.quantity }}</span>
                         </div>
                     </span>

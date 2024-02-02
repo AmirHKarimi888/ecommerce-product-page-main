@@ -80,6 +80,12 @@ body {
     .header-cart-checkout-btn {
         @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg hover:bg-orange-400 duration-300 cursor-pointer;
     }
+    .header-cart-added-modal-backdrop {
+        @apply fixed top-0 left-0 w-full h-screen grid justify-center items-center bg-gray-800/80;   
+    }
+    .header-cart-added-modal {
+        @apply w-[320px] p-5 bg-white rounded-lg fadeIn text-center;
+    }
 
     /*Profile*/
     .header-profile-container {
@@ -237,6 +243,19 @@ body {
     }
     .product-details-add-to-card-btn {
         @apply text-white w-[50%] max-[500px]:w-full p-2 bg-orange-500 rounded-md flex justify-center gap-3 cursor-pointer;
+    }
+
+
+
+    /*Collections*/
+    .collections-view {
+        @apply w-full;
+    }
+    .collection-product-items {
+        @apply my-20 max-sm:w-[90%] sm:w-[85%] md:w-[75%] lg:w-[60%]  mx-auto grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5;
+    }
+    .collection-product-item {
+        @apply p-5 border shadow-xl shadow-gray-300 text-center rounded-lg;
     }
 }
 
