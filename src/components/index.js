@@ -12,6 +12,8 @@ import ProductPictureModal from "../components/ProductPictureModal.vue";
 import ProductDetails from "../components/ProductDetails.vue";
 import ProductDetailsAddToCart from "../components/ProductDetailsAddToCart.vue";
 
+import Pagination from "../components/Pagination.vue";
+
 import Spinner from "../components/Spinner.vue";
 
-export { HeaderView, HeaderNavbar, HeaderSidebar, HeaderCart, HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal, HeaderProfile, ProductPictures, ProductPictureModal, ProductDetails, ProductDetailsAddToCart, Spinner };
+export { HeaderView, HeaderNavbar, HeaderSidebar, HeaderCart, HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal, HeaderProfile, ProductPictures, ProductPictureModal, ProductDetails, ProductDetailsAddToCart, Pagination, Spinner };

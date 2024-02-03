@@ -14,6 +14,15 @@
                     </RouterLink>
                 </li>
             </ul>
+
+            <Pagination 
+              v-if="paginationView"
+              :pagination="pagination"
+              :paginationStart="paginationStart"
+              :paginationEnd="paginationEnd"
+              @goToPrevious="goToPrevious"
+              @goToNext="goToNext"
+            />
         </div>
 
         <div v-else>
@@ -25,17 +34,55 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useStore } from "../store";
-import { Spinner } from "../components";
+import { Pagination, Spinner } from "../components";
 
 const collectionsView = ref(false);
+const paginationView = ref(false);
 
 const displayingProducts = ref([]);
+
+const paginationEnd = ref(0);
+const paginationStart = ref(0);
+const pagination = ref(1);
 
 onMounted(async () => {
     await useStore().getAllProducts()
         .then(() => {
-            displayingProducts.value = useStore().products.slice(useStore().products.length - 6, useStore().products.length).reverse();
+            paginationEnd.value = useStore().products.length;
+            paginationStart.value = useStore().products.length - 6;
         })
-        .then(() => collectionsView.value = true);
+        .then(() => {
+            displayingProducts.value = useStore().products
+            .slice(paginationStart.value, paginationEnd.value)
+            .reverse();
+        })
+        .then(() => collectionsView.value = true)
+        .then(() => paginationView.value = true)
 })
+
+const goToPrevious = () => {
+    paginationEnd.value+=6;
+    paginationStart.value+=6;
+    pagination.value--;
+
+    displayingProducts.value = useStore().products
+    .slice(paginationStart.value, paginationEnd.value)
+    .reverse();
+}
+
+const goToNext = () => {
+    paginationEnd.value-=6;
+    paginationStart.value-=6;
+    pagination.value++;
+
+    if(paginationStart.value >= 0) {
+        displayingProducts.value = useStore().products
+        .slice(paginationStart.value, paginationEnd.value)
+        .reverse();
+    } else {
+        displayingProducts.value = useStore().products
+        .slice(0, paginationEnd.value)
+        .reverse();
+    }
+}
 </script>
