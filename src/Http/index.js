@@ -2,7 +2,7 @@ import axios from "axios";
 
 class Http {
 
-    url = "http://localhost:3000";
+    url = "https://65bead90dcfcce42a6f2d1a5.mockapi.io/amir888";
 
     async get(url) {
         try {

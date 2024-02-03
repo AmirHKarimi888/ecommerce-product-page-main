@@ -24,7 +24,8 @@ onMounted(() => {
         useStore().loggedInUser ? useStore().loginStatus = true : useStore().loginStatus = false;
 
       } else {
-        localStorage.setItem("loggedInUser", "");
+        localStorage.setItem("loggedInUser", "8888888888");
+        window.location.href = "/";
       }
     })
 })
