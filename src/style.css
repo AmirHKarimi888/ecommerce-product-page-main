@@ -80,10 +80,10 @@ body {
     .header-cart-checkout-btn {
         @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg hover:bg-orange-400 duration-300 cursor-pointer;
     }
-    .header-cart-added-modal-backdrop {
+    .header-cart-added-modal-backdrop, .header-cart-deleted-modal-backdrop, .header-cart-changed-modal-backdrop {
         @apply fixed top-0 left-0 w-full h-screen grid justify-center items-center bg-gray-800/80;   
     }
-    .header-cart-added-modal {
+    .header-cart-added-modal, .header-cart-deleted-modal, .header-cart-changed-modal {
         @apply w-[320px] p-5 bg-white rounded-lg fadeIn text-center;
     }
 

@@ -34,7 +34,10 @@ const displayingProducts = ref([]);
 onMounted(async () => {
     await useStore().getAllProducts()
         .then(() => {
-            displayingProducts.value = useStore().products.slice(useStore().products.length - 6, useStore().products.length).reverse();
+            displayingProducts.value = useStore().products
+            .slice(useStore().products.length - 6, useStore().products.length)
+            .filter(product => product?.type === "women" ? product : null)
+            .reverse();
         })
         .then(() => collectionsView.value = true);
 })

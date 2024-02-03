@@ -11,12 +11,12 @@
         {
           "id": "1",
           "uid": "1111111111111111",
-          "quantity": 24
+          "quantity": 6
         },
         {
           "id": "2",
           "uid": "2222222222222222",
-          "quantity": 3
+          "quantity": 8
         }
       ]
     }
@@ -29,6 +29,7 @@
       "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
       "price": 250,
       "discount": 0.5,
+      "type": "men",
       "pictures": [
         {
           "id": "1",
@@ -59,6 +60,7 @@
       "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
       "price": 250,
       "discount": 0.5,
+      "type": "women",
       "pictures": [
         {
           "id": "1",

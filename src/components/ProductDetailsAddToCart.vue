@@ -8,7 +8,7 @@
         </div>
 
         <div class="product-details-btns">
-            <span class="product-details-plus-minus">
+            <span v-if="useStore().loginStatus" class="product-details-plus-minus">
                 <span class="product-details-minus-btn" @click="quantity > 0 ? quantity-- : null"><img
                         src="../assets/images/icon-minus.svg" alt="minus"></span>
                 <span class="product-details-quantity">{{ quantity }}</span>
@@ -16,27 +16,34 @@
                         alt="plus"></span>
             </span>
 
-            <span class="product-details-add-to-card-btn" @click="addToCart">
+            <span v-if="useStore().loginStatus" class="product-details-add-to-card-btn" @click="addToCart">
                 <img src="../assets/images/icon-cart.svg" alt="cart">
                 <span>Add to cart</span>
+            </span>
+
+            <span v-else class="product-details-add-to-card-btn">
+                <RouterLink to="/signup">Signup To Order</RouterLink>
             </span>
         </div>
     </div>
     <HeaderCartAddedModal />
+    <HeaderCartDeletedModal />
+    <HeaderCartChangedModal />
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useStore } from '../store';
 import Http from "../Http";
-import { HeaderCartAddedModal } from ".";
+import { HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal } from ".";
 
 const props = defineProps(["selectedProductId"]);
 
 const quantity = ref(0);
 const foundInCartItem = ref({});
+const previousFoundInCartItem = ref({});
 
-onMounted(async () => {
+const setFoundInCartItem = async () => {
     await useStore().getLoggedInUser(props.selectedProductId)
         .then(() => {
             foundInCartItem.value = useStore().loggedInUser?.cart?.find(item => {
@@ -46,53 +53,93 @@ onMounted(async () => {
             })
 
             if (foundInCartItem.value) quantity.value = foundInCartItem.value?.quantity;
+
         })
+}
+
+onMounted(async () => {
+    await setFoundInCartItem();
+
+    previousFoundInCartItem.value = {...foundInCartItem.value};
 })
 
 
 const addToCart = async () => {
 
-    if (foundInCartItem.value) {
+    if (useStore().loginStatus) {
 
-        useStore().loggedInUser.cart.filter(item => {
-            if (item?.uid === useStore().selectedProduct.uid) {
-                item.quantity = quantity.value;
-            }
-        })
+        if (foundInCartItem.value) {
 
-        await Http.put(Http.url + `/users/${useStore().loggedInUser?.id}`, {
-            ...useStore().loggedInUser
-        })
-            .then(async () => {
-                await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
-                    .then((res) => useStore().loggedInUser = res.data);
-            })
-            .then(() => {
-                document.querySelector(".header-cart-added-modal-backdrop").classList.remove("hidden");
-            })
 
-    } else {
+            if (quantity.value > 0) {
 
-        if (quantity.value > 0) {
-            await Http.put(Http.url + `/users/${useStore().loggedInUser?.id}`, {
-                ...useStore().loggedInUser,
-                cart: [
-                    ...useStore().loggedInUser?.cart,
-                    {
-                        id: useStore().selectedProduct?.id,
-                        uid: useStore().selectedProduct?.uid,
-                        quantity: quantity.value
+
+                useStore().loggedInUser.cart.filter(item => {
+                    if (item?.uid === useStore().selectedProduct.uid) {
+                        item.quantity = quantity.value;
                     }
-                ]
-            })
-                .then(async () => {
-                    await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
-                        .then((res) => useStore().loggedInUser = res.data);
                 })
-                .then(() => {
-                document.querySelector(".header-cart-added-modal-backdrop").classList.remove("hidden");
-            })
+                
+
+                if (previousFoundInCartItem.value.quantity !== quantity.value) {
+                    await Http.put(Http.url + `/users/${useStore().loggedInUser?.id}`, {
+                        ...useStore().loggedInUser
+                    })
+                        .then(async () => {
+                            await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
+                                .then((res) => useStore().loggedInUser = res.data);
+                        })
+                        .then(async () => await setFoundInCartItem())
+                        .then(() => previousFoundInCartItem.value = {...foundInCartItem.value})
+                        .then(() => {
+                            document.querySelector(".header-cart-changed-modal-backdrop").classList.remove("hidden");
+                        })
+                }
+            }
+
+
+            if (quantity.value === 0) {
+                let updatedResCart = [];
+
+                updatedResCart = useStore().loggedInUser.cart.filter(i => i.uid !== useStore().selectedProduct.uid ? i : null);
+
+                await Http.put(Http.url + `/users/${useStore().loggedInUser.id}`, {
+                    ...useStore().loggedInUser,
+                    cart: updatedResCart
+                })
+                    .then(async () => await setFoundInCartItem())
+                    .then(() => {
+                        document.querySelector(".header-cart-deleted-modal-backdrop").classList.remove("hidden");
+                    })
+            }
+
+
+        } else {
+
+            if (quantity.value > 0) {
+                await Http.put(Http.url + `/users/${useStore().loggedInUser?.id}`, {
+                    ...useStore().loggedInUser,
+                    cart: [
+                        ...useStore().loggedInUser?.cart,
+                        {
+                            id: useStore().selectedProduct?.id,
+                            uid: useStore().selectedProduct?.uid,
+                            quantity: quantity.value
+                        }
+                    ]
+                })
+                    .then(async () => {
+                        await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
+                            .then((res) => useStore().loggedInUser = res.data);
+                    })
+                    .then(async () => await setFoundInCartItem())
+                    .then(() => {
+                        document.querySelector(".header-cart-added-modal-backdrop").classList.remove("hidden");
+                    })
+            }
         }
     }
+
 }
+
 </script>

@@ -5,20 +5,34 @@
 
             <ul v-if="cartItems.length > 0" class="header-cart-items">
                 <li v-for="(item, index) of cartItems" :key="index" class="header-cart-item">
-                    <span class="header-cart-item-thumbnail">
-                        <img :src="item?.pictures[0].thumbnail" alt="product">
-                    </span>
 
-                    <span class="header-cart-item-descr">
-                        <div class="header-cart-item-descr-title">{{ item?.title }}</div>
-                        <div class="header-cart-item-descr-price">
-                            <span class="header-cart-item-descr-price-single">${{ +item?.price * +item?.discount }} × {{ item?.quantity }}</span>
-                            <span class="header-cart-item-descr-price-total"> = ${{ +item?.price * +item?.discount * item?.quantity }}</span>
-                        </div>
-                    </span>
+                    <a :href="`/products/${item?.uid}`">
+                        <span class="header-cart-item-thumbnail">
+                            <img :src="item?.pictures[0].thumbnail" alt="product">
+                        </span>
+                    </a>
 
-                    <span class="header-cart-item-delete-btn">
+                    <a :href="`/products/${item?.uid}`">
+                        <span class="header-cart-item-descr">
+                            <div class="header-cart-item-descr-title">{{ item?.title }}</div>
+                            <div class="header-cart-item-descr-price">
+                                <span class="header-cart-item-descr-price-single">${{ +item?.price * +item?.discount }} × {{
+                                    item?.quantity }}</span>
+                                <span class="header-cart-item-descr-price-total"> = ${{ +item?.price * +item?.discount *
+                                    item?.quantity }}</span>
+                            </div>
+                        </span>
+                    </a>
+
+                    <span class="header-cart-item-delete-btn" @click="deleteFromCart(item)">
                         <img src="../assets/images/icon-delete.svg" alt="delete-product">
+                    </span>
+                </li>
+
+                <li class="header-cart-item">
+                    <span class="header-cart-item-descr">
+                        <span class="font-bold text-md">Total Price :</span>
+                        <span class="font-bold text-md text-orange-600"> ${{ cartItems.reduce((t, p) => t = t + (p.price * p.quantity), 0) * useStore().selectedProduct?.discount }}</span>
                     </span>
                 </li>
 
@@ -39,19 +53,39 @@ import Http from "../Http";
 
 const cartItems = ref([]);
 
-onMounted(async () => {
-
+const getCartItems = async () => {
     await useStore().getLoggedInUser()
-    .then(() => {
-        useStore().loggedInUser.cart.map(async(item) => {
-            await Http.get(Http.url + `/products/${item.id}`)
-            .then((res) => {
-                cartItems.value.push({
-                    ...res.data,
-                    quantity: item.quantity
-                });
+        .then(() => {
+            useStore().loggedInUser.cart.map(async (item) => {
+                await Http.get(Http.url + `/products/${item.id}`)
+                    .then((res) => {
+                        cartItems.value.push({
+                            ...res.data,
+                            quantity: item.quantity
+                        });
+                    })
             })
         })
-    })
+
+}
+
+onMounted(async () => {
+    await getCartItems();
 })
+
+const deleteFromCart = async (item) => {
+    let updatedResCart = [];
+
+    updatedResCart = useStore().loggedInUser.cart.filter(i => i.uid !== item.uid ? i : null);
+
+    await Http.put(Http.url + `/users/${useStore().loggedInUser.id}`, {
+        ...useStore().loggedInUser,
+        cart: updatedResCart
+    })
+        .then(() => cartItems.value = [])
+        .then(async () => await getCartItems())
+        .then(() => {
+                document.querySelector(".header-cart-deleted-modal-backdrop").classList.remove("hidden");
+        })
+}
 </script>

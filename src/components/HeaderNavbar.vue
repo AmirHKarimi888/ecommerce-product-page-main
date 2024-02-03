@@ -36,10 +36,10 @@ import { useStore } from "../store";
 
 const navItems = reactive([
     { title: "Collections", link: "/collections" },
-    { title: "Men", link: "/" },
-    { title: "Women", link: "/" },
-    { title: "About", link: "/" },
-    { title: "Contact", link: "/" }
+    { title: "Men", link: "/collections/men" },
+    { title: "Women", link: "/collections/women" },
+    // { title: "About", link: "/" },
+    { title: "Contact", link: "/contact" }
 ])
 
 const cartView =  ref(false);

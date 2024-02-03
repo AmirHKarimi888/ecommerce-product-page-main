@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, CollectionsView, ProductView } from "../views";
+import { HomeView, CollectionsView, MenView, WomenView, ProductView } from "../views";
  
 const routes = [
     { path: "/", name: "Home", component: HomeView },
     { path: "/collections", name: "Collections", component: CollectionsView },
-    { path: "/products/:id", name: "Product", component: ProductView }
+    { path: "/collections/men", name: "Men", component: MenView },
+    { path: "/collections/women", name: "Women", component: WomenView },
+    { path: "/products/:id", name: "Product", component: ProductView },
+    { path: "/contact", name: "Contact", beforeEnter() { window.open('https://amirhk888.iran.liara.run/about'), '_blank' } }
 ]
 
 const router = createRouter({
