@@ -8,7 +8,7 @@
                         <div class="mt-5 text-gray-600 font-bold">{{ product?.title }}</div>
                         <div class="mt-2 flex justify-center gap-2">
                             <span class="line-through bg-gray-300 p-2 rounded-lg">${{ product?.price }}</span>
-                            <span class="bg-orange-500 p-2 rounded-lg text-white">${{ +product?.price * +product?.discount
+                            <span class="bg-orange-500 p-2 rounded-lg text-white">${{ +product?.price * (1 - +product?.discount)
                             }}</span>
                         </div>
                     </RouterLink>

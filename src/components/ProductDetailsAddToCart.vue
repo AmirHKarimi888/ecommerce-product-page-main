@@ -2,7 +2,7 @@
     <div class="product-details-add-to-cart">
         <div class="product-details-price">
             <span class="product-details-price-main">${{ +useStore().selectedProduct?.price?.toFixed(2) *
-                +useStore().selectedProduct?.discount }}</span>
+                (1 - +useStore().selectedProduct?.discount) }}</span>
             <span class="product-details-price-discount">{{ +useStore().selectedProduct?.discount * 100 }}%</span>
             <div class="product-details-price-prev-price">${{ useStore().selectedProduct?.price }}</div>
         </div>
@@ -79,7 +79,7 @@ const addToCart = async () => {
                         item.quantity = quantity.value;
                     }
                 })
-                
+
 
                 if (previousFoundInCartItem.value.quantity !== quantity.value) {
                     await Http.put(Http.url + `/users/${useStore().loggedInUser?.id}`, {
