@@ -13,9 +13,9 @@
             </div>
 
             <div class="product-picture-modal-select-pictures">
-                <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg' : ''"
+                <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer"
                     @click="emit('selectPicture', picture)">
-                    <img :src="picture?.thumbnail" alt="Product-Picture" :class="counter === +picture?.id ? 'rounded-lg opacity-50' : ''">
+                    <img :src="picture?.thumbnail" alt="Product-Picture" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg rounded-lg opacity-50' : ''">
                 </span>
             </div>
         </div>
