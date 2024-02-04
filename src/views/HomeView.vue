@@ -4,7 +4,9 @@
             <ul class="collection-product-items">
                 <li class="collection-product-item" v-for="product of displayingProducts">
                     <RouterLink :to="{ name: 'Product', params: { id: product?.uid } }">
-                        <img :src="product?.pictures[0].src" alt="poster">
+                        <div class="collection-product-item-img-container">
+                            <img :src="product?.pictures[0].src" alt="poster">
+                        </div>
                         <div class="mt-5 text-gray-600 font-bold">{{ product?.title }}</div>
                         <div class="mt-2 flex justify-center gap-2">
                             <span class="line-through bg-gray-300 p-2 rounded-lg">${{ product?.price }}</span>
