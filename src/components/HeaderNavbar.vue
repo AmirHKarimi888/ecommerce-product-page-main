@@ -12,7 +12,10 @@
         </ul>
 
         <div class="navbar-btns">
-            <span v-if="useStore().loginStatus" class="navbar-btns-cart" @click="toggleCart"><img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" /></span>
+            <span v-if="useStore().loginStatus" class="navbar-btns-cart" @click="toggleCart">
+                <span v-if="useStore().loggedInUser?.cart.length > 0" class="w-4 h-4 relative top-2 left-1 flex justify-center items-center rounded-full bg-orange-500 text-white text-[70%]">{{ useStore().loggedInUser?.cart.reduce((t, p) => t + p.quantity, 0) }}</span>
+                <img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" />
+            </span>
             <span v-if="useStore().loginStatus" class="navbar-btns-avatar" @click="toggleProfile"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
             <RouterLink v-else to="/" class="navbar-btns-signup text-white">Signup</RouterLink>
         </div>

@@ -5,17 +5,17 @@
 
         <div class="product-picture-modal">    
             <div class="product-picture-modal-thumbnail">
-                <span class="w-12 h-12 p-2 cursor-pointer" @click="emit('showNextPicture')"><img src="../assets/images/icon-previous.svg" alt="next"></span>
-                
-                <img class="w-[450px]" :src="showingMainPicture" alt="Product-Thumbnail">
-
-                <span class="w-12 h-12 p-2 cursor-pointer" @click="emit('showPreviousPicture')"><img src="../assets/images/icon-next.svg" alt="prev"></span>
+                <span class="product-picture-modal-thumbnail-img-container">
+                    <span class="w-12 h-12 p-2 cursor-pointer" @click="emit('showPreviousPicture')"><img src="../assets/images/icon-previous.svg" alt="prev"></span>
+                    <img class="w-[450px]" :src="showingMainPicture" alt="Product-Thumbnail">
+                    <span class="w-12 h-12 p-2 cursor-pointer" @click="emit('showNextPicture')"><img src="../assets/images/icon-next.svg" alt="next"></span>
+                </span>
             </div>
 
             <div class="product-picture-modal-select-pictures">
                 <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer"
                     @click="emit('selectPicture', picture)">
-                    <img :src="picture?.thumbnail" alt="Product-Picture" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg rounded-lg opacity-50' : ''">
+                    <img :src="picture?.thumbnail" alt="Product-Picture" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg opacity-50' : ''">
                 </span>
             </div>
         </div>

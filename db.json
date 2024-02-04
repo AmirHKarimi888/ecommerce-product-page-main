@@ -7,23 +7,7 @@
       "email": "amirhk888@email.com",
       "avatar": "",
       "password": "123456789",
-      "cart": [
-        {
-          "id": "2",
-          "uid": "2222222222222222",
-          "quantity": 8
-        },
-        {
-          "id": "1",
-          "uid": "1111111111111111",
-          "quantity": 8
-        },
-        {
-          "id": "3",
-          "uid": "3333333333333333",
-          "quantity": 4
-        }
-      ]
+      "cart": []
     }
   ],
   "products": [

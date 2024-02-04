@@ -1,7 +1,9 @@
 <template>
     <div class="product-pictures max-[500px]:hidden">
         <div class="product-thumbnail">
-            <img @click="toggleProductPictureModal" :src="showingMainPicture" class="cursor-pointer" alt="Product-Thumbnail">
+            <div class="product-thumbnail-container">
+                <img @click="toggleProductPictureModal" :src="showingMainPicture" class="cursor-pointer" alt="Product-Thumbnail">
+            </div>
             <ProductPictureModal 
              :selectedProductsPictures="selectedProductsPictures"
              :showingMainPicture="showingMainPicture"
@@ -16,7 +18,7 @@
         <div class="product-select-pictures">
             <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer"
                 @click="selectPicture(picture)">
-                <img :src="picture?.thumbnail" :class="counter === +picture?.id ? 'opacity-50' : ''" alt="Product-Picture">
+                <img :src="picture?.thumbnail" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg opacity-50' : ''" alt="Product-Picture">
             </span>
         </div>
     </div>
@@ -56,6 +58,7 @@ onMounted(async () => {
         .then(() => selectedProduct.value = useStore().selectedProduct)
         .then(() => selectedProductsPictures.value = selectedProduct.value.pictures)
         .then(() => showingMainPicture.value = selectedProductsPictures.value[0].src)
+        .then(() => selectedProductsPictures.value = selectedProduct.value.pictures.reverse())
 })
 
 

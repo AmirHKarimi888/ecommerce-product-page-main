@@ -1,5 +1,8 @@
 import axios from "axios";
 
+//"https://65bead90dcfcce42a6f2d1a5.mockapi.io/amir888"
+//"http://localhost:3000"
+
 class Http {
 
     url = "https://65bead90dcfcce42a6f2d1a5.mockapi.io/amir888";
