@@ -1,47 +1,53 @@
 <template>
     <div class="header-cart-container hidden z-10">
         <div class="header-cart">
-            <div class="header-cart-title">Cart</div>
+            <div v-if="cartView">
+                <div class="header-cart-title">Cart</div>
 
-            <ul v-if="cartItems.length > 0" class="header-cart-items">
-                <li v-for="(item, index) of cartItems" :key="index" class="header-cart-item">
+                <ul v-if="cartItems.length > 0" class="header-cart-items">
+                    <li v-for="(item, index) of cartItems" :key="index" class="header-cart-item">
 
-                    <a :href="`/products/${item?.uid}`">
-                        <span class="header-cart-item-thumbnail">
-                            <img :src="item?.pictures[0].thumbnail" alt="product">
+                        <a :href="`/products/${item?.uid}`">
+                            <span class="header-cart-item-thumbnail">
+                                <img :src="item?.pictures[0].thumbnail" alt="product">
+                            </span>
+                        </a>
+
+                        <a :href="`/products/${item?.uid}`">
+                            <span class="header-cart-item-descr">
+                                <div class="header-cart-item-descr-title">{{ item?.title }}</div>
+                                <div class="header-cart-item-descr-price">
+                                    <span class="header-cart-item-descr-price-single">${{ +item?.price * (1 -
+                                        +item?.discount) }} × {{item?.quantity }}</span>
+                                    <span class="header-cart-item-descr-price-total"> = ${{ +item?.price * (1 -
+                                        +item?.discount) *
+                                        item?.quantity }}</span>
+                                </div>
+                            </span>
+                        </a>
+
+                        <span class="header-cart-item-delete-btn" @click="deleteFromCart(item)">
+                            <img src="../assets/images/icon-delete.svg" alt="delete-product">
                         </span>
-                    </a>
+                    </li>
 
-                    <a :href="`/products/${item?.uid}`">
+                    <li class="header-cart-item">
                         <span class="header-cart-item-descr">
-                            <div class="header-cart-item-descr-title">{{ item?.title }}</div>
-                            <div class="header-cart-item-descr-price">
-                                <span class="header-cart-item-descr-price-single">${{ +item?.price * (1 - +item?.discount) }} × {{
-                                    item?.quantity }}</span>
-                                <span class="header-cart-item-descr-price-total"> = ${{ +item?.price * (1 - +item?.discount) *
-                                    item?.quantity }}</span>
-                            </div>
+                            <span class="font-bold text-md">Total Price :</span>
+                            <span class="font-bold text-md text-orange-600"> ${{ cartItems.reduce((t, p) => t = t + (p.price
+                                * p.quantity * (1 - p.discount)), 0) }}</span>
                         </span>
-                    </a>
+                    </li>
 
-                    <span class="header-cart-item-delete-btn" @click="deleteFromCart(item)">
-                        <img src="../assets/images/icon-delete.svg" alt="delete-product">
-                    </span>
-                </li>
+                </ul>
+                <div v-if="cartItems.length > 0" class="header-cart-checkout-btn">Checkout</div>
 
-                <li class="header-cart-item">
-                    <span class="header-cart-item-descr">
-                        <span class="font-bold text-md">Total Price :</span>
-                        <span class="font-bold text-md text-orange-600"> ${{ cartItems.reduce((t, p) => t = t + (p.price * p.quantity * (1 - p.discount)), 0) }}</span>
-                    </span>
-                </li>
-
-            </ul>
-            <div v-if="cartItems.length > 0" class="header-cart-checkout-btn">Checkout</div>
-
-            <div v-else class="header-cart-items">
-                Your cart is empty!
+                <div v-else class="header-cart-items">
+                    Your cart is empty!
+                </div>
             </div>
+
+            <Spinner class="h-[300px] pt-16" v-else />
         </div>
     </div>
 </template>
@@ -50,8 +56,10 @@
 import { onMounted, ref, watch } from "vue";
 import { useStore } from "../store";
 import Http from "../Http";
+import { Spinner } from ".";
 
 const cartItems = ref([]);
+const cartView = ref(false);
 
 const getCartItems = async () => {
     await useStore().getLoggedInUser()
@@ -70,7 +78,8 @@ const getCartItems = async () => {
 }
 
 onMounted(async () => {
-    await getCartItems();
+    await getCartItems()
+    .then(() => cartView.value = true)
 })
 
 const deleteFromCart = async (item) => {
@@ -85,7 +94,7 @@ const deleteFromCart = async (item) => {
         .then(() => cartItems.value = [])
         .then(async () => await getCartItems())
         .then(() => {
-                document.querySelector(".header-cart-deleted-modal-backdrop").classList.remove("hidden");
+            document.querySelector(".header-cart-deleted-modal-backdrop").classList.remove("hidden");
         })
 }
 </script>

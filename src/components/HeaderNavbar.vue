@@ -12,6 +12,7 @@
         </ul>
 
         <div class="navbar-btns">
+            <span class="navbar-btns-search" @click="toggleSearchBox"><span class="fa fa-search cursor-pointer font-thin" alt="Search"></span></span>
             <span v-if="useStore().loginStatus" class="navbar-btns-cart" @click="toggleCart">
                 <span v-if="useStore().loggedInUser?.cart.length > 0" class="w-4 h-4 relative top-2 left-1 flex justify-center items-center rounded-full bg-orange-500 text-white text-[70%]">{{ useStore().loggedInUser?.cart.reduce((t, p) => t + p.quantity, 0) }}</span>
                 <img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" />
@@ -29,12 +30,16 @@
     />
     <HeaderProfile
     />
+    <HeaderSearchBox
+      v-if="searchBoxView"
+      @closeSearchBox="closeSearchBox"
+    />
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { HeaderCart, HeaderProfile, HeaderSidebar } from ".";
+import { HeaderCart, HeaderProfile, HeaderSidebar, HeaderSearchBox } from ".";
 import { useStore } from "../store";
 
 const navItems = reactive([
@@ -68,5 +73,21 @@ const toggleSidebar = () => {
     const sidebarEl = document.querySelector(".sidebar");
     sidebarBackdropEl?.classList.toggle("hidden");
     sidebarEl?.classList.add("fadeInToRight");
+}
+
+const searchBoxView = ref(false);
+const toggleSearchBox = () => {
+    searchBoxView.value = !searchBoxView.value;
+    setTimeout(() => {
+        const searchBoxBackdropEl = document.querySelector(".header-search-box-backdrop");
+        const searchBoxEl = document.querySelector(".header-search-box");
+        searchBoxBackdropEl?.classList.toggle("hidden");
+        searchBoxEl?.classList.add("fadeInToRight");
+    }, 10)
+}
+
+const closeSearchBox = () => {
+    document.querySelector(".header-search-box-backdrop").classList.add("hidden");
+    searchBoxView.value = false;
 }
 </script>

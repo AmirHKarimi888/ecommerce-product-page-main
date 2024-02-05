@@ -18,7 +18,7 @@
         <div class="product-select-pictures">
             <span v-for="picture of selectedProductsPictures" :key="picture?.id" class="cursor-pointer"
                 @click="selectPicture(picture)">
-                <img :src="picture?.thumbnail" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg opacity-50' : ''" alt="Product-Picture">
+                <img :src="picture?.thumbnail" :class="counter === +picture?.id ? 'border-4 border-orange-600 rounded-lg' : ''" alt="Product-Picture">
             </span>
         </div>
     </div>

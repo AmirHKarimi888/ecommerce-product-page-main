@@ -19,7 +19,7 @@ body {
         @apply w-full h-20 border-b border-gray-200 flex justify-around max-[700px]:justify-between px-5 items-center;
     }
     .navbar-logo {
-        @apply flex items-center gap-x-1;
+        @apply flex items-center gap-x-1 mr-5;
     }
     .navbar-items {
         @apply h-full max-[700px]:hidden flex gap-x-6;
@@ -28,7 +28,10 @@ body {
         @apply h-full hover:border-b-[3px] duration-100 border-orange-400 text-gray-500 hover:text-gray-700 flex items-center;
     }
     .navbar-btns {
-        @apply flex gap-x-2;
+        @apply flex gap-x-[2px];
+    }
+    .navbar-btns-search {
+        @apply w-12 h-12 rounded-full flex justify-center items-center cursor-pointer hover:border text-xl hover:bg-gray-100 border-gray-200 text-gray-500;
     }
     .navbar-btns-cart {
         @apply w-12 h-12 rounded-full grid justify-center items-center cursor-pointer hover:border hover:bg-gray-100 border-gray-200;
@@ -45,7 +48,7 @@ body {
 
     /*Cart*/
     .header-cart-container {
-        @apply max-[500px]:flex justify-center;
+        @apply max-[500px]:flex justify-center z-20;
     }
     .header-cart {
         @apply fixed top-16 min-[501px]:right-24 w-[340px] max-[500px]:w-[90%] overflow-auto max-h-[600px] bg-white shadow-2xl rounded-lg border box-border;
@@ -81,7 +84,7 @@ body {
         @apply mb-7 mx-auto text-center w-[90%] p-3 text-white bg-orange-500 rounded-lg hover:bg-orange-400 duration-300 cursor-pointer;
     }
     .header-cart-added-modal-backdrop, .header-cart-deleted-modal-backdrop, .header-cart-changed-modal-backdrop {
-        @apply fixed top-0 left-0 w-full h-screen grid justify-center items-center bg-gray-800/80;   
+        @apply fixed top-0 left-0 w-full h-screen grid justify-center items-center bg-gray-800/80 z-30;   
     }
     .header-cart-added-modal, .header-cart-deleted-modal, .header-cart-changed-modal {
         @apply w-[320px] p-5 bg-white rounded-lg fadeIn text-center;
@@ -89,7 +92,7 @@ body {
 
     /*Profile*/
     .header-profile-container {
-        @apply max-[500px]:flex justify-center;
+        @apply max-[500px]:flex justify-center z-20;
     }
     .header-profile {
         @apply fixed top-16 min-[501px]:right-24 w-[340px] max-[500px]:w-[90%] bg-white shadow-2xl rounded-lg border box-border;
@@ -133,7 +136,7 @@ body {
 
     /*Sidebar*/
     .sidebar-backdrop {
-        @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80 z-10;
+        @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80 z-30;
     }
     .sidebar {
         @apply w-[210px] h-screen bg-white absolute top-0 left-0
@@ -146,6 +149,24 @@ body {
     }
     .sidebar-item {
         @apply hover:text-orange-500 duration-300;
+    }
+
+
+    /*SearchBox*/
+    .header-search-box-backdrop {
+        @apply fixed top-0 left-0 w-full py-20 h-screen flex justify-center bg-gray-800/80 z-30;
+    }
+    .header-search-box {
+        @apply  max-sm:w-[90%] sm:w-[85%] md:w-[75%] lg:w-[60%] overflow-auto rounded-lg p-10 bg-gray-100;
+    }
+    .header-search-box-items {
+        @apply my-20 w-full mx-auto grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5;
+    }
+    .header-search-box-item {
+        @apply p-5 border shadow-xl shadow-gray-300 text-center rounded-lg grid items-center bg-white;
+    }
+    .header-search-box-item-img-container {
+        @apply aspect-square flex items-center;
     }
 
 
@@ -169,7 +190,7 @@ body {
         @apply rounded-md aspect-square;
     }
     .product-picture-modal-backdrop {
-        @apply fixed top-0 left-0 w-full py-8 h-screen flex justify-center bg-gray-800/80;
+        @apply fixed top-0 left-0 w-full py-8 h-screen flex justify-center bg-gray-800/80 z-30;
     }
     .product-picture-modal {
         @apply w-[500px] h-[500px] grid gap-6;

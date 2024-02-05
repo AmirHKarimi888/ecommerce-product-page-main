@@ -1,5 +1,5 @@
 <template>
-    <div class="product-picture-modal-backdrop hidden z-20" @click.self="emit('toggleProductPictureModal')">
+    <div class="product-picture-modal-backdrop hidden" @click.self="emit('toggleProductPictureModal')">
         
         <span class="product-picture-modal-close-btn" @click="emit('toggleProductPictureModal')"><img src="../assets/images/icon-close.svg" alt="Close-Product"></span>
 

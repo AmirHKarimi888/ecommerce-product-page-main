@@ -2,7 +2,7 @@
 import { onMounted, ref } from "vue";
 import { RouterView } from "vue-router";
 import { useStore } from "./store";
-import { HeaderView } from './components';
+import { FooterView, HeaderView } from './components';
 
 let users = ref([]);
 
@@ -35,4 +35,5 @@ onMounted(() => {
 <template>
   <HeaderView />
   <RouterView />
+  <FooterView />
 </template>
