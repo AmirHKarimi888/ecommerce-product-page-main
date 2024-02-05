@@ -165,8 +165,20 @@ body {
     .header-search-box-item {
         @apply p-5 border shadow-xl shadow-gray-300 text-center rounded-lg grid items-center bg-white;
     }
+    .header-search-box-item-nothing-found {
+        @apply my-36 flex justify-center font-bold text-gray-600;
+    }
     .header-search-box-item-img-container {
         @apply aspect-square flex items-center;
+    }
+    .header-search-box-search-input {
+        @apply flex justify-center gap-2;
+    }
+    .header-search-box-search-input input {
+        @apply border border-gray-400 rounded-md p-1
+    }
+    .header-search-box-search-input button {
+        @apply rounded-md bg-orange-500 text-white p-2 hover:bg-orange-400 duration-300;
     }
 
 
