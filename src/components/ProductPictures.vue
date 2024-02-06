@@ -58,7 +58,6 @@ onMounted(async () => {
         .then(() => selectedProduct.value = useStore().selectedProduct)
         .then(() => selectedProductsPictures.value = selectedProduct.value.pictures)
         .then(() => showingMainPicture.value = selectedProductsPictures.value[0].src)
-        .then(() => selectedProductsPictures.value = selectedProduct.value.pictures.reverse())
 })
 
 
@@ -81,16 +80,16 @@ const selectPicture = (picture) => {
 //Mobile picture slider
 
 const showPreviousPicture = () => {
-    counter.value ++;
-    counter.value === 5 ? counter.value = 1 : null;
-    showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 
+    counter.value --;
+    counter.value === 0 ? counter.value = 4 : null;
+    showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 }
 
 const showNextPicture = () => {
 
-    counter.value --;
-    counter.value === 0 ? counter.value = 4 : null;
+    counter.value ++;
+    counter.value === 5 ? counter.value = 1 : null;
     showingMainPicture.value = selectedProductsPictures.value[counter.value - 1].src;
 }
 

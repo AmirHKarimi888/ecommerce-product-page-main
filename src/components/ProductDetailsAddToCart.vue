@@ -7,6 +7,20 @@
             <div class="product-details-price-prev-price">${{ useStore().selectedProduct?.price }}</div>
         </div>
 
+        <p class="product-details-rate">
+        <div><span class="text-orange-500">87%</span> Satisfactory</div>
+        <input @mouseup="rateToProduct" class="my-2" type="range" min="0" max="100" v-model="userProductRate">
+        <div>
+            <span v-if="foundRatedItem ? true : false">
+                You gave <span class="text-orange-500">{{ userProductRate }}%</span> to this product
+            </span>
+
+            <span class="font-light" v-else>
+                Do you want to rate? Just use the thumb above
+            </span>
+        </div>
+        </p>
+
         <div class="product-details-btns">
             <span v-if="useStore().loginStatus" class="product-details-plus-minus">
                 <span class="product-details-minus-btn" @click="quantity > 0 ? quantity-- : null"><img
@@ -37,14 +51,13 @@ import { useStore } from '../store';
 import Http from "../Http";
 import { HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal } from ".";
 
-const props = defineProps(["selectedProductId"]);
 
 const quantity = ref(0);
 const foundInCartItem = ref({});
 const previousFoundInCartItem = ref({});
 
 const setFoundInCartItem = async () => {
-    await useStore().getLoggedInUser(props.selectedProductId)
+    await useStore().getLoggedInUser()
         .then(() => {
             foundInCartItem.value = useStore().loggedInUser?.cart?.find(item => {
                 if (item?.uid === useStore().selectedProduct?.uid) {
@@ -57,10 +70,32 @@ const setFoundInCartItem = async () => {
         })
 }
 
-onMounted(async () => {
-    await setFoundInCartItem();
 
-    previousFoundInCartItem.value = {...foundInCartItem.value};
+
+const userProductRate = ref(0);
+const foundRatedItem = ref({});
+const previousFoundRatedItem = ref({});
+
+const setFoundRatedItem = async () => {
+    await useStore().getProduct(useStore().selectedProduct?.id)
+        .then(() => {
+            foundRatedItem.value = useStore().selectedProduct?.rates.find(item => {
+                if (item?.email === useStore().loggedInUser.email) {
+                    return item;
+                }
+            })
+
+            if (foundRatedItem.value) userProductRate.value = foundRatedItem.value?.rate;
+
+        })
+}
+
+onMounted(async () => {
+    await setFoundInCartItem()
+        .then(async () => await setFoundRatedItem())
+
+    previousFoundInCartItem.value = { ...foundInCartItem.value };
+    previousFoundRatedItem.value = { ...foundRatedItem.value };
 })
 
 
@@ -90,7 +125,7 @@ const addToCart = async () => {
                                 .then((res) => useStore().loggedInUser = res.data);
                         })
                         .then(async () => await setFoundInCartItem())
-                        .then(() => previousFoundInCartItem.value = {...foundInCartItem.value})
+                        .then(() => previousFoundInCartItem.value = { ...foundInCartItem.value })
                         .then(() => {
                             document.querySelector(".header-cart-changed-modal-backdrop").classList.remove("hidden");
                         })
@@ -140,6 +175,50 @@ const addToCart = async () => {
         }
     }
 
+}
+
+
+const rateToProduct = async () => {
+    if (useStore().loginStatus) {
+
+        if (foundRatedItem.value) {
+            useStore().selectedProduct.rates.filter(item => {
+                if (item?.email === useStore().loggedInUser.email) {
+                    item.rate = userProductRate.value;
+                }
+            })
+
+
+            if (previousFoundInCartItem.value.rate !== userProductRate.value) {
+                await Http.put(Http.url + `/products/${useStore().selectedProduct?.id}`, {
+                    ...useStore().selectedProduct
+                })
+                    .then(async () => {
+                        await Http.get(Http.url + `/products/${useStore().selectedProduct?.id}`)
+                            .then((res) => useStore().selectedProduct = res.data);
+                    })
+                    .then(async () => await setFoundRatedItem())
+                    .then(() => previousFoundRatedItem.value = { ...foundRatedItem.value })
+            }
+
+        } else {
+            await Http.put(Http.url + `/products/${useStore().selectedProduct?.id}`, {
+                ...useStore().selectedProduct,
+                rates: [
+                    ...useStore().selectedProduct?.rates,
+                    {
+                        email: useStore().loggedInUser.email,
+                        rate: userProductRate.value
+                    }
+                ]
+            })
+                .then(async () => {
+                    await Http.get(Http.url + `/products/${useStore().selectedProduct?.id}`)
+                        .then((res) => useStore().selectedProduct = res.data);
+                })
+                .then(async () => await setFoundRatedItem())
+        }
+    }
 }
 
 </script>
