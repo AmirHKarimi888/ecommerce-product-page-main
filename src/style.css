@@ -312,7 +312,7 @@ body {
             @apply w-full;
         }
         .contact-items {
-            @apply my-20 w-[350px] mx-auto grid gap-5;
+            @apply my-32 w-[350px] mx-auto grid gap-5;
         }
         .contact-item a {
             @apply p-5 border shadow-lg shadow-gray-300 text-center rounded-lg flex justify-start items-center gap-5 font-bold text-gray-600 hover:text-orange-400 bg-gray-50 hover:bg-gray-200 duration-300;

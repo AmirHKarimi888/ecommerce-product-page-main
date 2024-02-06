@@ -7,7 +7,7 @@
             </form>
             <ul v-if="collectionsView && displayingProducts.length > 0" class="header-search-box-items">
                 <li class="header-search-box-item" v-for="product of displayingProducts">
-                    <RouterLink :to="{ name: 'Product', params: { id: product?.uid } }">
+                    <a :href="`/products/${product?.uid}`">
                         <div class="header-search-box-item-img-container">
                             <img :src="product?.pictures[0].src" alt="poster">
                         </div>
@@ -17,7 +17,7 @@
                             <span class="bg-orange-500 p-2 rounded-lg text-white">${{ +product?.price * (1 - +product?.discount)
                             }}</span>
                         </div>
-                    </RouterLink>
+                    </a>
                 </li>
             </ul>
 

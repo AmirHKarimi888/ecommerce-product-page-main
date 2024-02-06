@@ -8,14 +8,19 @@
         </div>
 
         <p class="product-details-rate">
-        <div><span class="text-orange-500">87%</span> Satisfactory</div>
-        <input @click="rateToProduct" class="my-2" type="range" min="0" max="100" v-model="userProductRate">
-        <div>
+            <div><span :class="userProductRate > 70 ? 'text-green-600' : userProductRate < 70 && userProductRate >= 50 ? 'text-yellow-500' : userProductRate < 50 && userProductRate >= 30 ? 'text-orange-600' : userProductRate < 30 ? 'text-red-600' : ''">{{
+                   Math.floor(useStore().selectedProduct?.rates?.reduce((t, p) => t + +p.rate, 0)) }}%</span> Satisfaction</div>
+                   <input @mouseup="rateToProduct" @touchend="rateToProduct" class="my-2" type="range" min="0" max="100"
+                   v-model="userProductRate">
+            <div>
+
             <span v-if="foundRatedItem ? true : false">
-                You gave <span class="text-orange-500">{{ userProductRate }}%</span> to this product
+                   You rated <span
+                   :class="userProductRate > 70 ? 'text-green-600' : userProductRate < 70 && userProductRate >= 50 ? 'text-yellow-500' : userProductRate < 50 && userProductRate >= 30 ? 'text-orange-600' : userProductRate < 30 ? 'text-red-600' : ''">{{
+                    userProductRate }}%</span> to this product
             </span>
 
-            <span class="font-light" v-else>
+            <span v-else class="font-normal text-sm">
                 Do you want to rate? Just use the thumb above
             </span>
         </div>
