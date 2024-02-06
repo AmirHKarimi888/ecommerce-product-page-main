@@ -9,7 +9,7 @@
 
         <p class="product-details-rate">
         <div><span class="text-orange-500">87%</span> Satisfactory</div>
-        <input @mouseup="rateToProduct" class="my-2" type="range" min="0" max="100" v-model="userProductRate">
+        <input @click="rateToProduct" class="my-2" type="range" min="0" max="100" v-model="userProductRate">
         <div>
             <span v-if="foundRatedItem ? true : false">
                 You gave <span class="text-orange-500">{{ userProductRate }}%</span> to this product
