@@ -18,7 +18,7 @@
                 <img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" />
             </span>
             <span v-if="useStore().loginStatus" class="navbar-btns-avatar" @click="toggleProfile"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
-            <RouterLink v-else to="/" class="navbar-btns-signup text-white">Signup</RouterLink>
+            <RouterLink v-else to="/signup" class="navbar-btns-signup text-white">Signup</RouterLink>
         </div>
     </nav>
     <HeaderSidebar

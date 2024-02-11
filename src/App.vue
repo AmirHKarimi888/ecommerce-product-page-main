@@ -7,9 +7,8 @@ import { FooterView, HeaderView } from './components';
 let users = ref([]);
 
 //Get loggedIn user
-onMounted(() => {
-  useStore().getAllUsers()
-    .then(() => users.value = useStore().users)
+onMounted(async () => {
+  await useStore().getAllUsers()
     .then(() => {
       if ("loggedInUser" in localStorage) {
 
@@ -24,8 +23,8 @@ onMounted(() => {
         useStore().loggedInUser ? useStore().loginStatus = true : useStore().loginStatus = false;
 
       } else {
-        localStorage.setItem("loggedInUser", "8888888888");
-        window.location.href = "/";
+        // localStorage.setItem("loggedInUser", "8888888888");
+        // window.location.href = "/";
       }
     })
 })

@@ -7,24 +7,7 @@
             <div class="product-details-price-prev-price">${{ useStore().selectedProduct?.price }}</div>
         </div>
 
-        <p class="product-details-rate">
-            <div><span :class="userProductRate > 70 ? 'text-green-600' : userProductRate < 70 && userProductRate >= 50 ? 'text-yellow-500' : userProductRate < 50 && userProductRate >= 30 ? 'text-orange-600' : userProductRate < 30 ? 'text-red-600' : ''">{{
-                   Math.floor(useStore().selectedProduct?.rates?.reduce((t, p) => t + +p.rate, 0)) }}%</span> Satisfaction</div>
-                   <input @mouseup="rateToProduct" @touchend="rateToProduct" class="my-2" type="range" min="0" max="100"
-                   v-model="userProductRate">
-            <div>
-
-            <span v-if="foundRatedItem ? true : false">
-                   You rated <span
-                   :class="userProductRate > 70 ? 'text-green-600' : userProductRate < 70 && userProductRate >= 50 ? 'text-yellow-500' : userProductRate < 50 && userProductRate >= 30 ? 'text-orange-600' : userProductRate < 30 ? 'text-red-600' : ''">{{
-                    userProductRate }}%</span> to this product
-            </span>
-
-            <span v-else class="font-normal text-sm">
-                Do you want to rate? Just use the thumb above
-            </span>
-        </div>
-        </p>
+        <ProductDetailsRating />
 
         <div class="product-details-btns">
             <span v-if="useStore().loginStatus" class="product-details-plus-minus">
@@ -54,53 +37,31 @@
 import { ref, onMounted, watch } from "vue";
 import { useStore } from '../store';
 import Http from "../Http";
-import { HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal } from ".";
+import { HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal, ProductDetailsRating } from ".";
 
 
 const quantity = ref(0);
 const foundInCartItem = ref({});
 const previousFoundInCartItem = ref({});
 
-const setFoundInCartItem = async () => {
-    await useStore().getLoggedInUser()
-        .then(() => {
-            foundInCartItem.value = useStore().loggedInUser?.cart?.find(item => {
+const setFoundInCartItem = () => {
+
+    if(useStore().loggedInUser) {
+        foundInCartItem.value = useStore().loggedInUser?.cart?.find(item => {
                 if (item?.uid === useStore().selectedProduct?.uid) {
                     return item;
                 }
             })
 
-            if (foundInCartItem.value) quantity.value = foundInCartItem.value?.quantity;
-
-        })
+        if (foundInCartItem.value) quantity.value = foundInCartItem.value?.quantity;
+    }
 }
 
 
-
-const userProductRate = ref(0);
-const foundRatedItem = ref({});
-const previousFoundRatedItem = ref({});
-
-const setFoundRatedItem = async () => {
-    await useStore().getProduct(useStore().selectedProduct?.id)
-        .then(() => {
-            foundRatedItem.value = useStore().selectedProduct?.rates.find(item => {
-                if (item?.email === useStore().loggedInUser.email) {
-                    return item;
-                }
-            })
-
-            if (foundRatedItem.value) userProductRate.value = foundRatedItem.value?.rate;
-
-        })
-}
-
-onMounted(async () => {
-    await setFoundInCartItem()
-        .then(async () => await setFoundRatedItem())
+onMounted(() => {
+    setFoundInCartItem();
 
     previousFoundInCartItem.value = { ...foundInCartItem.value };
-    previousFoundRatedItem.value = { ...foundRatedItem.value };
 })
 
 
@@ -125,11 +86,8 @@ const addToCart = async () => {
                     await Http.put(Http.url + `/users/${useStore().loggedInUser?.id}`, {
                         ...useStore().loggedInUser
                     })
-                        .then(async () => {
-                            await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
-                                .then((res) => useStore().loggedInUser = res.data);
-                        })
-                        .then(async () => await setFoundInCartItem())
+                    .then(async () => await useStore().getLoggedInUser())
+                        .then(() => setFoundInCartItem())
                         .then(() => previousFoundInCartItem.value = { ...foundInCartItem.value })
                         .then(() => {
                             document.querySelector(".header-cart-changed-modal-backdrop").classList.remove("hidden");
@@ -147,7 +105,7 @@ const addToCart = async () => {
                     ...useStore().loggedInUser,
                     cart: updatedResCart
                 })
-                    .then(async () => await setFoundInCartItem())
+                    .then(() => setFoundInCartItem())
                     .then(() => {
                         document.querySelector(".header-cart-deleted-modal-backdrop").classList.remove("hidden");
                     })
@@ -168,11 +126,8 @@ const addToCart = async () => {
                         }
                     ]
                 })
-                    .then(async () => {
-                        await Http.get(Http.url + `/users/${useStore().loggedInUser.id}`)
-                            .then((res) => useStore().loggedInUser = res.data);
-                    })
-                    .then(async () => await setFoundInCartItem())
+                    .then(async () => await useStore().getLoggedInUser())
+                    .then(() => setFoundInCartItem())
                     .then(() => {
                         document.querySelector(".header-cart-added-modal-backdrop").classList.remove("hidden");
                     })
@@ -182,48 +137,5 @@ const addToCart = async () => {
 
 }
 
-
-const rateToProduct = async () => {
-    if (useStore().loginStatus) {
-
-        if (foundRatedItem.value) {
-            useStore().selectedProduct.rates.filter(item => {
-                if (item?.email === useStore().loggedInUser.email) {
-                    item.rate = userProductRate.value;
-                }
-            })
-
-
-            if (previousFoundInCartItem.value.rate !== userProductRate.value) {
-                await Http.put(Http.url + `/products/${useStore().selectedProduct?.id}`, {
-                    ...useStore().selectedProduct
-                })
-                    .then(async () => {
-                        await Http.get(Http.url + `/products/${useStore().selectedProduct?.id}`)
-                            .then((res) => useStore().selectedProduct = res.data);
-                    })
-                    .then(async () => await setFoundRatedItem())
-                    .then(() => previousFoundRatedItem.value = { ...foundRatedItem.value })
-            }
-
-        } else {
-            await Http.put(Http.url + `/products/${useStore().selectedProduct?.id}`, {
-                ...useStore().selectedProduct,
-                rates: [
-                    ...useStore().selectedProduct?.rates,
-                    {
-                        email: useStore().loggedInUser.email,
-                        rate: userProductRate.value
-                    }
-                ]
-            })
-                .then(async () => {
-                    await Http.get(Http.url + `/products/${useStore().selectedProduct?.id}`)
-                        .then((res) => useStore().selectedProduct = res.data);
-                })
-                .then(async () => await setFoundRatedItem())
-        }
-    }
-}
 
 </script>

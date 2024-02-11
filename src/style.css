@@ -284,7 +284,7 @@ body {
         @apply p-3 cursor-pointer;
     }
     .product-details-add-to-card-btn {
-        @apply text-white w-[50%] max-[500px]:w-full p-2 bg-orange-500 rounded-md flex justify-center gap-3 cursor-pointer;
+        @apply text-white w-[50%] max-[500px]:w-full p-2 bg-orange-500 rounded-md flex justify-center gap-3 text-center cursor-pointer;
     }
 
 
@@ -312,7 +312,7 @@ body {
             @apply w-full;
         }
         .contact-items {
-            @apply my-32 w-[350px] mx-auto grid gap-5;
+            @apply my-36 w-[350px] mx-auto grid gap-5;
         }
         .contact-item a {
             @apply p-5 border shadow-lg shadow-gray-300 text-center rounded-lg flex justify-start items-center gap-5 font-bold text-gray-600 hover:text-orange-400 bg-gray-50 hover:bg-gray-200 duration-300;

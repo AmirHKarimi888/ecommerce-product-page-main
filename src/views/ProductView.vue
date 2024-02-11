@@ -27,10 +27,11 @@ const showProduct = ref(false);
 
 onMounted(async () => {
 
-    await useStore().getAllProducts()
-        .then(() => {
-            foundProduct.value = useStore().products.find((product) => product.uid === params.id ? product : null);
-        })
+    await useStore().getLoggedInUser()
+        .then(async () => await useStore().getAllProducts())
+        .then(() => foundProduct.value = useStore().products.find((product) => product.uid === params.id ? product : null))
+        .then(async () => await useStore().getProduct(foundProduct.value?.id))
+        .then(() => foundProduct.value = useStore().selectedProduct)
         .then(() => showProduct.value = true)
 })
 </script>

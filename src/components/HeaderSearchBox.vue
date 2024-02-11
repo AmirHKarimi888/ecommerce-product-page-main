@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useStore } from "../store";
 import { Pagination, Spinner } from "../components";
 
@@ -59,22 +59,6 @@ const paginationEnd = ref(0);
 const paginationStart = ref(0);
 const pagination = ref(1);
 
-onMounted(async () => {
-    await useStore().getAllProducts()
-    .then(() => collectionsView.value = true)
-    .then(() => paginationView.value = true)
-        // .then(() => {
-        //     paginationEnd.value = useStore().products.length;
-        //     paginationStart.value = useStore().products.length - 6;
-        // })
-        // .then(() => {
-        //     displayingProducts.value = useStore().products
-        //     .slice(paginationStart.value, paginationEnd.value)
-        //     .reverse();
-        // })
-        // .then(() => collectionsView.value = true)
-        // .then(() => paginationView.value = true)
-})
 
 const searchForProducts = async () => {
     if(searchInput.value !== "") {

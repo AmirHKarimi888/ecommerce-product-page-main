@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, CollectionsView, MenView, WomenView, ProductView, ContactView } from "../views";
+import { HomeView, CollectionsView, MenView, WomenView, ProductView, ContactView, SignupView } from "../views";
  
 const routes = [
     { path: "/", name: "Home", component: HomeView },
@@ -7,6 +7,7 @@ const routes = [
     { path: "/collections/men", name: "Men", component: MenView },
     { path: "/collections/women", name: "Women", component: WomenView },
     { path: "/products/:id", name: "Product", component: ProductView },
+    { path: "/signup", name: "Signup", component: SignupView },
     { path: "/contact", name: "Contact", component: ContactView
     // ,beforeEnter() { window.open('https://amirhk888.iran.liara.run/about'), '_blank' } 
     }

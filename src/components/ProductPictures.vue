@@ -53,11 +53,13 @@ const showingMainPicture = ref('');
 
 const counter = ref(1);
 
-onMounted(async () => {
-    await useStore().getProduct(props.selectedProductId)
-        .then(() => selectedProduct.value = useStore().selectedProduct)
-        .then(() => selectedProductsPictures.value = selectedProduct.value.pictures)
-        .then(() => showingMainPicture.value = selectedProductsPictures.value[0].src)
+onMounted(() => {
+    
+    if(useStore().selectedProduct) {
+        selectedProduct.value = useStore().selectedProduct
+        selectedProductsPictures.value = selectedProduct.value.pictures
+        showingMainPicture.value = selectedProductsPictures.value[0].src
+    }
 })
 
 
