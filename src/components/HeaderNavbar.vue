@@ -15,9 +15,9 @@
             <span class="navbar-btns-search" @click="toggleSearchBox"><span class="fa fa-search cursor-pointer font-thin" alt="Search"></span></span>
             <span v-if="useStore().loginStatus" class="navbar-btns-cart" @click="toggleCart">
                 <span v-if="useStore().loggedInUser?.cart.length > 0" class="w-4 h-4 relative top-2 left-1 flex justify-center items-center rounded-full bg-orange-500 text-white text-[70%]">{{ useStore().loggedInUser?.cart.reduce((t, p) => t + p.quantity, 0) }}</span>
-                <img class="w-6" src="../assets/images/icon-cart.svg" alt="Cart" />
+                <span class="fa fa-shopping-cart cursor-pointer text-gray-600 text-xl" alt="Cart"></span>
             </span>
-            <span v-if="useStore().loginStatus" class="navbar-btns-avatar" @click="toggleProfile"><img class="w-12 cursor-pointer" src="../assets/images/image-avatar.png" alt="Avatar" /></span>
+            <span v-if="useStore().loginStatus" class="navbar-btns-avatar" @click="toggleProfile"><img class="w-12 cursor-pointer rounded-full" :src="useStore().loggedInUser?.avatar" alt="Avatar" /></span>
             <RouterLink v-else to="/signup" class="navbar-btns-signup text-white">Signup</RouterLink>
         </div>
     </nav>

@@ -48,7 +48,7 @@ import { Pagination, Spinner } from "../components";
 
 const emit = defineEmits(["closeSearchBox"]);
 
-const collectionsView = ref(false);
+const collectionsView = ref(true);
 const paginationView = ref(false);
 
 const searchInput = ref("");

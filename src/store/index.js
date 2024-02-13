@@ -44,3 +44,9 @@ export const useStore = defineStore("store", () => {
 
     return { products, selectedProduct, loggedInUser, loginStatus, users, getAllProducts, getProduct, getAllUsers, getLoggedInUser }
 })
+
+export const useSignupStore = defineStore("signup", () => {
+    const signupView = ref(true);
+
+    return { signupView }
+})

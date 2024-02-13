@@ -14,10 +14,13 @@ import ProductDetails from "../components/ProductDetails.vue";
 import ProductDetailsAddToCart from "../components/ProductDetailsAddToCart.vue";
 import ProductDetailsRating from "../components/ProductDetailsRating.vue";
 
+import SignUp from "../components/SignUp.vue";
+import SignIn from "../components/SignIn.vue";
+
 import FooterView from "../components/FooterView.vue";
 
 import Pagination from "../components/Pagination.vue";
 
 import Spinner from "../components/Spinner.vue";
 
-export { HeaderView, HeaderNavbar, HeaderSidebar, HeaderCart, HeaderSearchBox, HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal, HeaderProfile, ProductPictures, ProductPictureModal, ProductDetails, ProductDetailsRating, ProductDetailsAddToCart, FooterView, Pagination, Spinner };
+export { HeaderView, HeaderNavbar, HeaderSidebar, HeaderCart, HeaderSearchBox, HeaderCartAddedModal, HeaderCartDeletedModal, HeaderCartChangedModal, HeaderProfile, ProductPictures, ProductPictureModal, ProductDetails, ProductDetailsRating, ProductDetailsAddToCart, SignUp, SignIn, FooterView, Pagination, Spinner };

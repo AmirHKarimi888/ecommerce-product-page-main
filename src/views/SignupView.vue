@@ -1,15 +1,13 @@
 <template>
     <main>
-        <div class="signup">
+        <SignUp v-if="useSignupStore().signupView" />
 
-        </div>
-
-        <div class="singin">
-            
-        </div>
+        <SignIn v-else />
     </main>
 </template>
 
 <script setup>
+import { useSignupStore } from "../store"
+import { SignUp, SignIn } from "../components"
 
 </script>

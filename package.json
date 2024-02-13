@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vee-validate/yup": "^4.12.5",
     "pinia": "^2.1.7",
+    "vee-validate": "^4.12.5",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"
   },

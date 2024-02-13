@@ -12,8 +12,24 @@
           "id": "3",
           "uid": "3333333333333333",
           "quantity": 6
+        },
+        {
+          "id": "1",
+          "uid": "1111111111111111",
+          "quantity": 1
         }
       ]
+    },
+    {
+      "id": "2",
+      "uid": "2755328265310",
+      "username": "Amir",
+      "email": "amirhk20021111@gmail.com",
+      "password": "123456As#",
+      "avatar": "https://ui-avatars.com/api/?name=Amir&background=FE2E3F&color=fff",
+      "created": "02/13/2024 at 8:40 PM",
+      "cart": [],
+      "admin": false
     }
   ],
   "products": [
@@ -29,6 +45,10 @@
         {
           "email": "amirhk888@email.com",
           "rate": "91"
+        },
+        {
+          "email": "amirhk20021111@gmail.com",
+          "rate": "96"
         }
       ],
       "pictures": [
@@ -65,7 +85,11 @@
       "rates": [
         {
           "email": "amirhk888@email.com",
-          "rate": "95"
+          "rate": "81"
+        },
+        {
+          "email": "amirhk20021111@gmail.com",
+          "rate": "89"
         }
       ],
       "pictures": [
