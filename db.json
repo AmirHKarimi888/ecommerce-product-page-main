@@ -28,7 +28,13 @@
       "password": "123456As#",
       "avatar": "https://ui-avatars.com/api/?name=Amir&background=FE2E3F&color=fff",
       "created": "02/13/2024 at 8:40 PM",
-      "cart": [],
+      "cart": [
+        {
+          "id": "6",
+          "uid": "666666666666666666",
+          "quantity": 1
+        }
+      ],
       "admin": false
     }
   ],
@@ -48,7 +54,7 @@
         },
         {
           "email": "amirhk20021111@gmail.com",
-          "rate": "96"
+          "rate": "83"
         }
       ],
       "pictures": [
@@ -85,11 +91,11 @@
       "rates": [
         {
           "email": "amirhk888@email.com",
-          "rate": "81"
+          "rate": "95"
         },
         {
           "email": "amirhk20021111@gmail.com",
-          "rate": "89"
+          "rate": "82"
         }
       ],
       "pictures": [
@@ -126,6 +132,10 @@
       "rates": [
         {
           "email": "amirhk888@email.com",
+          "rate": "84"
+        },
+        {
+          "email": "amirhk20021111@gmail.com",
           "rate": "89"
         }
       ],
@@ -149,6 +159,79 @@
           "id": "4",
           "src": "https://m.media-amazon.com/images/I/71kSyOhgIiS._AC_SX575_.jpg",
           "thumbnail": "https://m.media-amazon.com/images/I/71kSyOhgIiS._AC_SX575_.jpg"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "uid": "4444444444444444",
+      "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+      "price": 109.95,
+      "discount": 0.2,
+      "type": "men",
+      "rates": [
+        {
+          "email": "amirhk20021111@gmail.com",
+          "rate": "84"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "1",
+          "src": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+          "thumbnail": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "uid": "55555555555555555",
+      "title": "Mens Casual Premium Slim Fit T-Shirts",
+      "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+      "price": 22.3,
+      "discount": 0.15,
+      "type": "men",
+      "rates": [],
+      "pictures": [
+        {
+          "id": "1",
+          "src": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "thumbnail": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "uid": "666666666666666666",
+      "title": "Mens Cotton Jacket",
+      "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+      "price": 55.99,
+      "discount": 0.18,
+      "type": "men",
+      "rates": [],
+      "pictures": [
+        {
+          "id": "1",
+          "src": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+          "thumbnail": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "uid": "77777777777777777",
+      "title": "Mens Casual Slim Fit",
+      "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "price": 15.99,
+      "discount": 0.15,
+      "type": "men",
+      "rates": [],
+      "pictures": [
+        {
+          "id": "1",
+          "src": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+          "thumbnail": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
         }
       ]
     }

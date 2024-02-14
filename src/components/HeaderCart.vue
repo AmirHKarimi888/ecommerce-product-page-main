@@ -17,11 +17,11 @@
                             <span class="header-cart-item-descr">
                                 <div class="header-cart-item-descr-title">{{ item?.title }}</div>
                                 <div class="header-cart-item-descr-price">
-                                    <span class="header-cart-item-descr-price-single">${{ +item?.price * (1 -
-                                        +item?.discount) }} × {{item?.quantity }}</span>
-                                    <span class="header-cart-item-descr-price-total"> = ${{ +item?.price * (1 -
+                                    <span class="header-cart-item-descr-price-single">${{ (+item?.price * (1 -
+                                        +item?.discount)).toFixed(2) }} × {{item?.quantity }}</span>
+                                    <span class="header-cart-item-descr-price-total"> = ${{ (+item?.price * (1 -
                                         +item?.discount) *
-                                        item?.quantity }}</span>
+                                        item?.quantity).toFixed(2) }}</span>
                                 </div>
                             </span>
                         </a>
@@ -34,8 +34,8 @@
                     <li class="header-cart-item">
                         <span class="header-cart-item-descr">
                             <span class="font-bold text-md">Total Price :</span>
-                            <span class="font-bold text-md text-orange-600"> ${{ cartItems.reduce((t, p) => t = t + (p.price
-                                * p.quantity * (1 - p.discount)), 0) }}</span>
+                            <span class="font-bold text-md text-orange-600"> ${{ (cartItems.reduce((t, p) => t = t + (p.price
+                                * p.quantity * (1 - p.discount)), 0)).toFixed(2) }}</span>
                         </span>
                     </li>
 

@@ -1,6 +1,6 @@
 <template>
     <p class="product-details-rate">
-    <div>
+    <div v-if="useStore().selectedProduct?.rates.length > 0">
         <span
             :class="Math.floor(useStore().selectedProduct?.rates?.reduce((t, p) => t + +p.rate, 0) / useStore().selectedProduct?.rates?.length) >= 70 ? 'text-green-600'
                 : Math.floor(useStore().selectedProduct?.rates?.reduce((t, p) => t + +p.rate, 0) / useStore().selectedProduct?.rates?.length) < 70 && Math.floor(useStore().selectedProduct?.rates?.reduce((t, p) => t + +p.rate, 0) / useStore().selectedProduct?.rates?.length) >= 50 ? 'text-yellow-500'

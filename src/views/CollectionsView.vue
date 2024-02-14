@@ -9,8 +9,8 @@
                         </div>
                         <div class="mt-5 text-gray-600 font-bold">{{ product?.title }}</div>
                         <div class="mt-2 flex justify-center gap-2">
-                            <span class="line-through bg-gray-300 p-2 rounded-lg">${{ product?.price }}</span>
-                            <span class="bg-orange-500 p-2 rounded-lg text-white">${{ +product?.price * (1 - +product?.discount)
+                            <span class="line-through bg-gray-300 p-2 rounded-lg">${{ +product?.price.toFixed(2) }}</span>
+                            <span class="bg-orange-500 p-2 rounded-lg text-white">${{ (+product?.price * (1 - +product?.discount)).toFixed(2)
                             }}</span>
                         </div>
                     </RouterLink>
@@ -54,9 +54,16 @@ onMounted(async () => {
             paginationStart.value = useStore().products.length - 6;
         })
         .then(() => {
-            displayingProducts.value = useStore().products
-            .slice(paginationStart.value, paginationEnd.value)
-            .reverse();
+            if (paginationStart.value >= 0) {
+                displayingProducts.value = useStore().products
+                    .slice(paginationStart.value, paginationEnd.value)
+                    .reverse();
+
+            } else {
+                displayingProducts.value = useStore().products
+                    .slice(0, paginationEnd.value)
+                    .reverse();
+            }
         })
         .then(() => collectionsView.value = true)
         .then(() => paginationView.value = true)

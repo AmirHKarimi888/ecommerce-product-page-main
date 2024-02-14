@@ -8,7 +8,7 @@
 }
 
 body {
-    @apply text-[16px] font-KumbhSans;
+    @apply text-[16px] font-KumbhSans bg-gray-50;
 }
 
 @layer components {
@@ -16,7 +16,7 @@ body {
 
     /*Navbar*/
     .navbar {
-        @apply w-full h-20 border-b border-gray-200 flex justify-around max-[700px]:justify-between px-5 items-center;
+        @apply w-full bg-white h-20 border-b border-gray-200 flex justify-around max-[700px]:justify-between px-5 items-center;
     }
     .navbar-logo {
         @apply flex items-center gap-x-1 mr-5;
@@ -297,7 +297,7 @@ body {
         @apply my-20 max-sm:w-[90%] sm:w-[85%] md:w-[75%] lg:w-[60%]  mx-auto grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5;
     }
     .collection-product-item {
-        @apply p-5 border shadow-xl shadow-gray-300 text-center rounded-lg grid items-center;
+        @apply p-5 border shadow-xl bg-white shadow-gray-300 text-center rounded-lg grid grid-rows-1 items-center;
     }
     .collection-product-item-img-container {
         @apply aspect-square flex items-center;
@@ -315,7 +315,7 @@ body {
             @apply my-36 w-[350px] mx-auto grid gap-5;
         }
         .contact-item a {
-            @apply p-5 border shadow-lg shadow-gray-300 text-center rounded-lg flex justify-start items-center gap-5 font-bold text-gray-600 hover:text-orange-400 bg-gray-50 hover:bg-gray-200 duration-300;
+            @apply p-5 border shadow-lg shadow-gray-300 text-center rounded-lg flex justify-start items-center gap-5 font-bold text-gray-600 hover:text-orange-400 bg-white hover:bg-gray-200 duration-300;
         }
 }
 

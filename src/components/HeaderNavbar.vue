@@ -2,7 +2,10 @@
     <nav class="navbar">
         <div class="navbar-logo">
             <span class="navbar-btns-menu" @click="toggleSidebar"><img class="cursor-pointer" src="../assets/images/icon-menu.svg" alt="Cart" /></span>
-            <RouterLink to="/"><img src="../assets/images/logo.svg" alt="Logo" /></RouterLink>
+            <RouterLink to="/">
+                <!-- <img src="../assets/images/logo.svg" alt="Logo" /> -->
+                <span class="text-xl font-bold text-gray-800">AmirShop</span>
+            </RouterLink>
         </div>
 
         <ul class="navbar-items">

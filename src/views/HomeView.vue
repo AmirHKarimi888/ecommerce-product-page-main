@@ -9,22 +9,17 @@
                         </div>
                         <div class="mt-5 text-gray-600 font-bold">{{ product?.title }}</div>
                         <div class="mt-2 flex justify-center gap-2">
-                            <span class="line-through bg-gray-300 p-2 rounded-lg">${{ product?.price }}</span>
-                            <span class="bg-orange-500 p-2 rounded-lg text-white">${{ +product?.price * (1 - +product?.discount)
+                            <span class="line-through bg-gray-300 p-2 rounded-lg">${{ +product?.price.toFixed(2) }}</span>
+                            <span class="bg-orange-500 p-2 rounded-lg text-white">${{ (+product?.price * (1 -
+                                +product?.discount)).toFixed(2)
                             }}</span>
                         </div>
                     </RouterLink>
                 </li>
             </ul>
 
-            <Pagination 
-              v-if="paginationView"
-              :pagination="pagination"
-              :paginationStart="paginationStart"
-              :paginationEnd="paginationEnd"
-              @goToPrevious="goToPrevious"
-              @goToNext="goToNext"
-            />
+            <Pagination v-if="paginationView" :pagination="pagination" :paginationStart="paginationStart"
+                :paginationEnd="paginationEnd" @goToPrevious="goToPrevious" @goToNext="goToNext" />
         </div>
 
         <div v-else>
@@ -52,39 +47,48 @@ onMounted(async () => {
         .then(() => {
             paginationEnd.value = useStore().products.length;
             paginationStart.value = useStore().products.length - 6;
+
         })
         .then(() => {
-            displayingProducts.value = useStore().products
-            .slice(paginationStart.value, paginationEnd.value)
-            .reverse();
+
+            if (paginationStart.value >= 0) {
+                displayingProducts.value = useStore().products
+                    .slice(paginationStart.value, paginationEnd.value)
+                    .reverse();
+
+            } else {
+                displayingProducts.value = useStore().products
+                    .slice(0, paginationEnd.value)
+                    .reverse();
+            }
         })
         .then(() => collectionsView.value = true)
         .then(() => paginationView.value = true)
 })
 
 const goToPrevious = () => {
-    paginationEnd.value+=6;
-    paginationStart.value+=6;
+    paginationEnd.value += 6;
+    paginationStart.value += 6;
     pagination.value--;
 
     displayingProducts.value = useStore().products
-    .slice(paginationStart.value, paginationEnd.value)
-    .reverse();
+        .slice(paginationStart.value, paginationEnd.value)
+        .reverse();
 }
 
 const goToNext = () => {
-    paginationEnd.value-=6;
-    paginationStart.value-=6;
+    paginationEnd.value -= 6;
+    paginationStart.value -= 6;
     pagination.value++;
 
-    if(paginationStart.value >= 0) {
+    if (paginationStart.value >= 0) {
         displayingProducts.value = useStore().products
-        .slice(paginationStart.value, paginationEnd.value)
-        .reverse();
+            .slice(paginationStart.value, paginationEnd.value)
+            .reverse();
     } else {
         displayingProducts.value = useStore().products
-        .slice(0, paginationEnd.value)
-        .reverse();
+            .slice(0, paginationEnd.value)
+            .reverse();
     }
 }
 </script>

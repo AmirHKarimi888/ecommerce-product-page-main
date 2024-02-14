@@ -1,10 +1,10 @@
 <template>
     <div class="product-details-add-to-cart">
         <div class="product-details-price">
-            <span class="product-details-price-main">${{ +useStore().selectedProduct?.price?.toFixed(2) *
-                (1 - +useStore().selectedProduct?.discount) }}</span>
+            <span class="product-details-price-main">${{ (+useStore().selectedProduct?.price?.toFixed(2) *
+                (1 - +useStore().selectedProduct?.discount)).toFixed(2) }}</span>
             <span class="product-details-price-discount">{{ +useStore().selectedProduct?.discount * 100 }}%</span>
-            <div class="product-details-price-prev-price">${{ useStore().selectedProduct?.price }}</div>
+            <div class="product-details-price-prev-price">${{ (+useStore().selectedProduct?.price).toFixed(2) }}</div>
         </div>
 
         <ProductDetailsRating />
