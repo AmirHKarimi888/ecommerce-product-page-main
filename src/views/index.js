@@ -5,5 +5,6 @@ import WomenView from "./WomenView.vue";
 import ProductView from "./ProductView.vue";
 import SignupView from "./SignupView.vue";
 import ContactView from "./ContactView.vue";
+import NotFoundView from "./NotFoundView.vue"
 
-export { HomeView, CollectionsView, MenView, WomenView, ProductView, SignupView, ContactView }
+export { HomeView, CollectionsView, MenView, WomenView, ProductView, SignupView, ContactView, NotFoundView }

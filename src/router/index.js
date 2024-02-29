@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, CollectionsView, MenView, WomenView, ProductView, ContactView, SignupView } from "../views";
+import { HomeView, CollectionsView, MenView, WomenView, ProductView, ContactView, SignupView, NotFoundView } from "../views";
 
 const routes = [
   { path: "/", name: "Home", component: HomeView },
@@ -11,7 +11,8 @@ const routes = [
   {
     path: "/contact", name: "Contact", component: ContactView
     // ,beforeEnter() { window.open('https://amirhk888.iran.liara.run/about'), '_blank' } 
-  }
+  },
+  { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFoundView }
 ]
 
 const router = createRouter({

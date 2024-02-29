@@ -16,8 +16,26 @@ export const useStore = defineStore("store", () => {
     }
 
     const getProduct = async (id) => {
-        await Http.get(Http.url + `/products/${id}`)
-        .then((res) => selectedProduct.value = res.data);
+        try {
+            await Http.get(Http.url + `/products/${id}`)
+            .then((res) => selectedProduct.value = res.data);
+        } catch {
+            
+            let foundProduct = products.value.find(product => product.uid === id);
+            
+            if(!foundProduct) {
+                
+                let thisId = location.href.substring(location.href.lastIndexOf('/') + 1);
+                foundProduct = products.value.find(product => thisId.includes(product.uid));
+
+                if(foundProduct) {
+                    location.href = `/products/${foundProduct.uid}`;
+
+                } else {
+                    location.href = "/notfound";
+                }
+            }
+        }
     }
 
     const getAllUsers = async() => {

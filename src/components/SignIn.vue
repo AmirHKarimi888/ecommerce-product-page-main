@@ -103,7 +103,7 @@ const signIn = async () => {
 
         } else {
 
-            foundErrorView.value = true;
+            foundErrorView.value = false;
         }
     })
 }
